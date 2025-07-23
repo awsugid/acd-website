@@ -1,28 +1,82 @@
 ---
 // Layout Imports
 import MainLayout from '../layouts/MainLayout.astro';
+// Component Imports
+import About from '../components/About';
+import Cfp from '../components/Cfp';
+import Sponsor from '../components/Sponsor';
+import PreviousCommunityDay from '../components/PreviousCommunityDay';
+import Faq from '../components/Faq';
 
+// astro imports
+import { Image } from 'astro:assets';
+
+// images
+import Acd from '../images/acd.png';
+import HeroBackground from '../images/hero-bg.jpg';
+
+// const
+const isOpenCfp = true;
+const currentYear = 2025;
+
+const questions = [
+    {
+        question: "What is AWS Community Day?",
+        answer: "AWS Community Day is a community-driven event, organized by the AWS community for the community. It's an opportunity for AWS users to come together, share knowledge, learn from each other, exchange best practices, and hear from industry experts through insightful presentations."
+    },
+    {
+        question: "Who can participate in this event?",
+        answer: "AWS Community Day is open to all AWS users, regardless of skill level, who are interested in learning and engaging with the community."
+    },
+    {
+        question: "Is registration required to participate in this event?",
+        answer: "Yes, registration is required to participate. Please register through the event website."
+    },
+    {
+        question: "Is there a fee for participating in this event?",
+        answer: "Yes, there is a registration fee to participate in this event."
+    },
+    {
+        question: "How to become a sponsor?",
+        answer: "Send an email directly to <a href=\"mailto: awsugid@gmail.com\">awsugid@gmail.com</a>. We will provide you with our sponsorship package, which includes detailed information on sponsorship levels and benefits."
+    }
+];
 // Full Astro Component Syntax:
 // https://docs.astro.build/basics/astro-components/
 ---
 
-<MainLayout>
+<MainLayout isOpenCfp={isOpenCfp}>
 	<main class="main">
     <!-- Hero Section -->
     <section id="hero" class="hero section dark-background">
       <div class="hero-background">
-          <img src="assets/img/hero-bg.jpg" alt="Hero Background" class="hero-bg-img">
+          <Image src={HeroBackground} alt="Hero Background" class="hero-bg-img">
           <div class="overlay"></div>
       </div>
       <div class="hero-content">
-          <img src="assets/img/acd.png" class="logo" title="AWS Community Day Indonesia">
+          <Image src={Acd} class="logo" alt="AWS Community Day Indonesia" />
           <h4>Uniting Developers and Community, Elevating Innovation with AWS</h4>
           <h5>Comming Soon</h5>
           <h6>TBA</h6>
           <a href="#about" class="btn-get-started">Start</a>
       </div>
     </section>
-
-
+    <!-- About -->
+    <About />
+    <Cfp currentYear={currentYear} isOpen={isOpenCfp} />
+    <!-- TODO: Update sponsor link -->
+    <Sponsor currentYear={currentYear} sponsorProposal="https://drive.google.com/file/d/1W0GLh1Opt5zWZTOwJwBWcvfR0U3UsLUq/view?usp=drivesdk" />
+    <Faq questionList={questions} />
+    <!-- Previous Community Day -->
+    <PreviousCommunityDay albums={[
+      {
+        link: 'https://photos.app.goo.gl/ohFB4F8EXHGYZ8Rq9',
+        title: 'AWS Community Day 2024'
+      },
+      {
+        link: 'https://drive.google.com/drive/folders/1X4V5RV25xvGHiSADFU_UvLasCN2T_ru_?usp=sharing',
+        title: 'AWS Community Day 2023'
+      },
+    ]} />
   </main>
 </MainLayout>
