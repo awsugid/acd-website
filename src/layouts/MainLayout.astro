@@ -6,7 +6,7 @@ import "../styles/main.css";
 import Header from "../components/Header.tsx";
 import Footer from "../components/Footer.tsx";
 const { isOpenCfp = false } = Astro.props;
-
+import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.min.js?url'; // Import Bootstrap JS
 ---
 
 <html lang="en">
@@ -41,6 +41,7 @@ const { isOpenCfp = false } = Astro.props;
       class="scroll-top d-flex align-items-center justify-content-center"
       ><i class="bi bi-arrow-up-short"></i></a
     >
+    <script src={bootstrap}></script>
     <script is:inline src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="../scripts/main.js"></script>
   </body>

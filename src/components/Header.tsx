@@ -1,26 +1,61 @@
-import AwsUgLogo from '../images/logo.png?url';
+import AwsUgLogo from "../images/logo.png?url";
 
-export default function Header({isOpenCfp} : {isOpenCfp: boolean}) {
-    return (
-        <header id="header" className="header d-flex align-items-center fixed-top">
-            <div className="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
-                <a href="https://awscommunity.id" className="logo d-flex align-items-center">
-                    <img src={AwsUgLogo} alt="AWS User Group Indonesia" />
-                </a>
-                <nav id="navmenu" className="navmenu">
-                    <ul>
-                        <li><a href="#hero" className="active">Home</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        {isOpenCfp && (<li><a href="#cfp">CFP</a></li>)}
-                        {!isOpenCfp && (<li><a href="#speaker">Speaker</a></li>)}
-                        {!isOpenCfp && (<li><a href="#agenda">Agenda</a></li>)}
-                        <li><a href="#sponsor">Sponsor</a></li>
-                        <li><a href="#team">Team</a></li>
-                        <li><a href="#faq">FAQ</a></li>
-                    </ul>
-                    <i className="mobile-nav-toggle d-xl-none bi bi-list"></i>
-                </nav>
-
-            </div>
-        </header>);
+export default function Header({ isOpenCfp }: { isOpenCfp: boolean }) {
+  return (
+    <header id="header" className="navbar navbar-expand-lg">
+      <div className="container">
+        <a href="https://awscommunity.id" className="navbar-brand">
+          <img
+            src={AwsUgLogo}
+            width={50}
+            height={50}
+            alt="AWS User Group Indonesia"
+          />
+        </a>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <nav className="navbar-nav collapse navbar-collapse" id="navbarSupportedContent">
+          <a href="#hero" className="nav-link">
+            Home
+          </a>
+          <a href="#about" className="nav-link">
+            About Us
+          </a>
+          {isOpenCfp && (
+            <a href="#cfp" className="nav-link">
+              CFP
+            </a>
+          )}
+          {!isOpenCfp && (
+            <a href="#speaker" className="nav-link">
+              Speaker
+            </a>
+          )}
+          {!isOpenCfp && (
+            <a href="#agenda" className="nav-link">
+              Agenda
+            </a>
+          )}
+          <a href="#sponsor" className="nav-link">
+            Sponsor
+          </a>
+          <a href="#team" className="nav-link">
+            Team
+          </a>
+          <a href="#faq" className="nav-link">
+            FAQ
+          </a>
+        </nav>
+      </div>
+    </header>
+  );
 }
