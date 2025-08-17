@@ -68,7 +68,7 @@ function CloseCfp({ currentYear }: { currentYear: number }) {
         <div className="text-center mt-3">
           <a
             className="btn btn-primary"
-            href={`https://sessionize.com/aws-comm-day-id-${currentYear}`}
+            href={`https://sessionize.com/aws-community-day-indonesia-${currentYear}`}
           >
             Thank You!
           </a>
