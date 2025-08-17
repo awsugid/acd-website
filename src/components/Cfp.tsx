@@ -45,7 +45,7 @@ function OpenCfp({ currentYear }: { currentYear: number }) {
       </div>
       <div className="text-center mt-3">
         <a
-          href={`https://sessionize.com/aws-comm-day-id-${currentYear}`}
+          href={`https://sessionize.com/aws-community-day-indonesia-${currentYear}`}
           className="btn btn-primary"
           target="_blank"
         >
