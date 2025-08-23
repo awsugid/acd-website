@@ -1,0 +1,10 @@
+---
+// Get current year dynamically
+const currentYear = new Date().getFullYear();
+
+// Simple redirect to sessionize with current year
+return Astro.redirect(
+    `https://sessionize.com/aws-community-day-indonesia-${currentYear}`,
+    307,
+);
+---
