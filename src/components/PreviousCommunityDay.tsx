@@ -48,7 +48,7 @@ export default function PreviousCommunityDay({
               href={album.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl overflow-hidden hover:bg-white/10 transition-all duration-500 hover:transform hover:scale-105 hover:shadow-2xl block cursor-pointer"
+              className="group relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl overflow-hidden hover:bg-white/10 transition-all duration-100 hover:transform hover:scale-105 hover:shadow-2xl block cursor-pointer"
             >
               {/* Card Content */}
               <div className="p-8 sm:p-10">
@@ -100,7 +100,7 @@ export default function PreviousCommunityDay({
               </div>
 
               {/* Hover Overlay Effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-orange-500/10 to-pink-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-orange-500/10 to-pink-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-100 rounded-3xl"></div>
             </a>
           ))}
         </div>

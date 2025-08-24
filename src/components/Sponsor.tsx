@@ -86,8 +86,9 @@ export default function Sponsor({
               className={`group relative ${
                 index === 0 ? "md:scale-105 md:z-10" : ""
               }`}
+              style={{ display: "flex", minHeight: "480px" }}
             >
-              <div className="bg-white/5 backdrop-blur-xl border border-white/10 border-2 rounded-3xl p-8 hover:bg-white/10 transition-all duration-500 hover:transform hover:scale-105 hover:shadow-2xl h-full">
+              <div className="bg-white/5 backdrop-blur-xl border-white/10 border-2 rounded-3xl p-8 hover:bg-white/10 transition-all duration-100 ease-in-out hover:transform hover:scale-105 hover:shadow-2xl h-full flex flex-col">
                 {/* Tier Header */}
                 <div className="text-center mb-8">
                   <div
@@ -120,7 +121,7 @@ export default function Sponsor({
                 </div>
 
                 {/* Features */}
-                <div className="space-y-4 mb-8">
+                <div className="space-y-4 mb-8 flex-grow">
                   {tier.features.map((feature, featureIndex) => (
                     <div
                       key={featureIndex}
@@ -145,7 +146,7 @@ export default function Sponsor({
                 </div>
 
                 {/* CTA Button */}
-                <div className="text-center">
+                <div className="text-center mt-auto">
                   <a
                     href="mailto:awsugid@gmail.com"
                     className={`inline-block w-full bg-gradient-to-r ${tier.color} text-white font-bold py-3 px-6 rounded-full hover:shadow-lg transition-all duration-20 transform hover:scale-105 hover:text-slate-100`}
@@ -161,7 +162,7 @@ export default function Sponsor({
         {/* Benefits Section */}
         <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 sm:p-12 mb-16">
           <h3 className="text-2xl sm:text-3xl font-bold text-white text-center mb-12">
-            Why Sponsor Us?
+            The Benefit of Supporting AWS Community Day 2025
           </h3>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -270,8 +271,8 @@ export default function Sponsor({
               Ready to Make an Impact?
             </h4>
             <p className="text-base sm:text-lg text-orange-100 mb-8 max-w-2xl mx-auto">
-              Let's discuss how we can create the perfect sponsorship package
-              for your organization.
+              Let’s explore how we can build the perfect partnership for AWS
+              Community Day 2025!{" "}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a

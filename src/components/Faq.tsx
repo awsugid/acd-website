@@ -75,7 +75,7 @@ export default function Faq({ questionList }: FaqProp) {
               </button>
 
               <div
-                className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                className={`overflow-hidden transition-all duration-100 ease-in-out ${
                   openIndex === index
                     ? "max-h-[1000px] opacity-100"
                     : "max-h-0 opacity-0"

@@ -1,86 +1,113 @@
-import { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 
-interface CountdownTimerProps {
-  targetDate?: string;
-}
-
-function CountdownTimer({
-  targetDate = "2025-09-06T23:59:00+07:00",
-}: CountdownTimerProps) {
-  const [timeLeft, setTimeLeft] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-  });
-
+function CfpCountdown() {
   useEffect(() => {
-    const updateCountdown = () => {
+    // CFP countdown function
+    function updateCfpCountdown() {
       const now = new Date().getTime();
-      const eventTime = new Date(targetDate).getTime();
-      const difference = eventTime - now;
+      const deadline = new Date("2025-09-06T23:59:59+07:00").getTime(); // September 6th, 2025 Jakarta time
+      const timeLeft = deadline - now;
 
-      if (difference <= 0) {
-        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+      const daysEl = document.getElementById("cfp-days");
+      const hoursEl = document.getElementById("cfp-hours");
+      const minutesEl = document.getElementById("cfp-minutes");
+      const secondsEl = document.getElementById("cfp-seconds");
+
+      if (!daysEl || !hoursEl || !minutesEl || !secondsEl) return;
+
+      if (timeLeft <= 0) {
+        daysEl.textContent = "00";
+        hoursEl.textContent = "00";
+        minutesEl.textContent = "00";
+        secondsEl.textContent = "00";
         return;
       }
 
-      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
       const hours = Math.floor(
-        (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
+        (timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
       );
-      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+      const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
-      setTimeLeft({ days, hours, minutes, seconds });
-    };
+      // Animate number changes
+      animateValue(daysEl, parseInt(daysEl.textContent) || 0, days);
+      animateValue(hoursEl, parseInt(hoursEl.textContent) || 0, hours);
+      animateValue(minutesEl, parseInt(minutesEl.textContent) || 0, minutes);
+      animateValue(secondsEl, parseInt(secondsEl.textContent) || 0, seconds);
+    }
 
-    // Initial call
-    updateCountdown();
+    function animateValue(element, start, end) {
+      if (start === end || !element) return;
+      if (isNaN(start)) start = 0;
+      if (isNaN(end)) end = 0;
 
-    // Update every second
-    const interval = setInterval(updateCountdown, 1000);
+      element.style.transform = "scale(1.1)";
+      element.style.transition = "transform 0.25s ease-in-out";
+      setTimeout(() => {
+        element.textContent = end.toString().padStart(2, "0");
+        element.style.transform = "scale(1)";
+      }, 200);
+    }
 
-    return () => clearInterval(interval);
-  }, [targetDate]);
+    // Initialize countdown
+    updateCfpCountdown();
 
-  const formatNumber = (num: number): string => num.toString().padStart(2, "0");
+    // Update countdown every second
+    const countdownInterval = setInterval(updateCfpCountdown, 1000);
+
+    // Cleanup interval on unmount
+    return () => clearInterval(countdownInterval);
+  }, []);
 
   return (
-    <div className="grid grid-cols-4 gap-2 sm:gap-3 md:gap-4">
-      <div className="bg-black/40 backdrop-blur-lg border border-white/20 rounded-xl p-3 sm:p-4 md:p-5 hover:bg-black/50 transition-all duration-300 shadow-xl flex flex-col items-center">
-        <div className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white transition-all duration-300">
-          {formatNumber(timeLeft.days)}
+    <div className="max-w-md mx-auto mt-8">
+      <h4 className="text-lg sm:text-xl font-bold text-white mb-4">
+        CFP Submission Deadline:
+      </h4>
+      <div className="grid grid-cols-4 gap-2 sm:gap-3">
+        {/* Days */}
+        <div className="bg-black/40 backdrop-blur-lg border border-white/20 rounded-xl p-3 hover:bg-black/50 transition-all duration-300 shadow-xl flex flex-col items-center">
+          <div
+            className="text-2xl sm:text-3xl font-bold text-white"
+            id="cfp-days"
+          >
+            00
+          </div>
+          <div className="text-xs text-gray-300 font-medium mt-1">Days</div>
         </div>
-        <div className="text-xs sm:text-sm text-gray-300 font-medium mt-2">
-          Days
-        </div>
-      </div>
 
-      <div className="bg-black/40 backdrop-blur-lg border border-white/20 rounded-xl p-3 sm:p-4 md:p-5 hover:bg-black/50 transition-all duration-300 shadow-xl flex flex-col items-center">
-        <div className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white transition-all duration-300">
-          {formatNumber(timeLeft.hours)}
+        {/* Hours */}
+        <div className="bg-black/40 backdrop-blur-lg border border-white/20 rounded-xl p-3 hover:bg-black/50 transition-all duration-300 shadow-xl flex flex-col items-center">
+          <div
+            className="text-2xl sm:text-3xl font-bold text-white"
+            id="cfp-hours"
+          >
+            00
+          </div>
+          <div className="text-xs text-gray-300 font-medium mt-1">Hrs</div>
         </div>
-        <div className="text-xs sm:text-sm text-gray-300 font-medium mt-2">
-          Hrs
-        </div>
-      </div>
 
-      <div className="bg-black/40 backdrop-blur-lg border border-white/20 rounded-xl p-3 sm:p-4 md:p-5 hover:bg-black/50 transition-all duration-300 shadow-xl flex flex-col items-center">
-        <div className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white transition-all duration-300">
-          {formatNumber(timeLeft.minutes)}
+        {/* Minutes */}
+        <div className="bg-black/40 backdrop-blur-lg border border-white/20 rounded-xl p-3 hover:bg-black/50 transition-all duration-300 shadow-xl flex flex-col items-center">
+          <div
+            className="text-2xl sm:text-3xl font-bold text-white"
+            id="cfp-minutes"
+          >
+            00
+          </div>
+          <div className="text-xs text-gray-300 font-medium mt-1">Min</div>
         </div>
-        <div className="text-xs sm:text-sm text-gray-300 font-medium mt-2">
-          Min
-        </div>
-      </div>
 
-      <div className="bg-black/40 backdrop-blur-lg border border-white/20 rounded-xl p-3 sm:p-4 md:p-5 hover:bg-black/50 transition-all duration-300 shadow-xl flex flex-col items-center">
-        <div className="text-4xl sm:text-5xl lg:text-6xl font-bold text-orange-400 animate-pulse transition-all duration-300">
-          {formatNumber(timeLeft.seconds)}
-        </div>
-        <div className="text-xs sm:text-sm text-gray-300 font-medium mt-2">
-          Sec
+        {/* Seconds */}
+        <div className="bg-black/40 backdrop-blur-lg border border-white/20 rounded-xl p-3 hover:bg-black/50 transition-all duration-300 shadow-xl flex flex-col items-center">
+          <div
+            className="text-2xl sm:text-3xl font-bold text-orange-400 animate-pulse"
+            id="cfp-seconds"
+          >
+            00
+          </div>
+          <div className="text-xs text-gray-300 font-medium mt-1">Sec</div>
         </div>
       </div>
     </div>
@@ -118,14 +145,9 @@ function OpenCfp({ currentYear }: { currentYear: number }) {
             expertise and connect with fellow AWS enthusiasts in the
             Indonesian-speaking community.
           </p>
-          <div className="flex justify-center">
-            <div className="text-center">
-              <h1 className="text-lg sm:text-xl lg:text-2xl font-bold leading-tight text-white mb-4">
-                Submissions deadline
-              </h1>
-              <CountdownTimer />
-            </div>
-          </div>
+
+          {/* Countdown Timer */}
+          <CfpCountdown />
         </div>
       </div>
 
@@ -153,7 +175,7 @@ function OpenCfp({ currentYear }: { currentYear: number }) {
             </div>
             <p className="text-sm sm:text-base text-gray-300 leading-relaxed mb-6">
               We invite submissions from diverse speakers, whether you're an
-              AWS-certified professional, developer, researcher, or tech
+              AWS-certified professional, developer, researcher, or cloud
               enthusiast.
             </p>
             <div className="space-y-3">
@@ -279,10 +301,10 @@ function OpenCfp({ currentYear }: { currentYear: number }) {
             {topics.map((topic, index) => (
               <div
                 key={index}
-                className="flex items-center space-x-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-all duration-200 group"
+                className="flex items-center space-x-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-all duration-20 group"
               >
-                <div className="w-2 h-2 rounded-full bg-gradient-to-r from-orange-400 to-pink-500 group-hover:scale-125 transition-transform duration-200"></div>
-                <span className="text-sm text-gray-300 group-hover:text-white transition-colors duration-200">
+                <div className="w-2 h-2 rounded-full bg-gradient-to-r from-orange-400 to-pink-500 group-hover:scale-125 transition-transform duration-20"></div>
+                <span className="text-sm text-gray-300 group-hover:text-white transition-colors duration-20">
                   {topic}
                 </span>
               </div>
@@ -311,7 +333,7 @@ function OpenCfp({ currentYear }: { currentYear: number }) {
             href={`https://sessionize.com/aws-community-day-indonesia-${currentYear}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center space-x-3 bg-white text-orange-600 hover:text-orange-700 font-bold py-4 px-8 rounded-full transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
+            className="inline-flex items-center space-x-3 bg-white text-orange-600 hover:text-orange-700 font-bold py-4 px-8 rounded-full transform hover:scale-105 transition-all duration-20 shadow-lg hover:shadow-xl"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -320,9 +342,10 @@ function OpenCfp({ currentYear }: { currentYear: number }) {
               height="24"
               fill="none"
               stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              className="lucide lucide-send-horizontal-icon lucide-send-horizontal"
             >
               <path d="M3.714 3.048a.498.498 0 0 0-.683.627l2.843 7.627a2 2 0 0 1 0 1.396l-2.842 7.627a.498.498 0 0 0 .682.627l18-8.5a.5.5 0 0 0 0-.904z" />
               <path d="M6 12h16" />
@@ -373,7 +396,7 @@ function CloseCfp({ currentYear }: { currentYear: number }) {
           href={`https://sessionize.com/aws-community-day-indonesia-${currentYear}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center space-x-3 bg-gradient-to-r from-green-500 to-teal-600 hover:from-green-600 hover:to-teal-700 text-white font-bold py-4 px-8 rounded-full transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
+          className="inline-flex items-center space-x-3 bg-gradient-to-r from-green-500 to-teal-600 hover:from-green-600 hover:to-teal-700 text-white font-bold py-4 px-8 rounded-full transform hover:scale-105 transition-all duration-20 shadow-lg hover:shadow-xl"
         >
           <svg
             className="w-5 h-5"
@@ -425,7 +448,7 @@ function CloseCfp({ currentYear }: { currentYear: number }) {
 
         <a
           href="mailto:awsugid@gmail.com"
-          className="inline-flex items-center space-x-3 text-orange-400 hover:text-orange-300 font-semibold transition-colors duration-200"
+          className="inline-flex items-center space-x-3 text-orange-400 hover:text-orange-300 font-semibold transition-colors duration-20"
         >
           <svg
             className="w-5 h-5"
@@ -448,21 +471,21 @@ function CloseCfp({ currentYear }: { currentYear: number }) {
 }
 
 export default function Cfp({
-  currentYear = 2024,
-  isOpen = true,
+  currentYear,
+  isOpen,
 }: {
-  currentYear?: number;
-  isOpen?: boolean;
+  currentYear: number;
+  isOpen: boolean;
 }) {
   return (
     <section
       id="cfp"
-      className="relative py-24 overflow-hidden bg-gradient-to-br from-gray-900 via-purple-900/20 to-gray-900"
+      className="relative py-24 overflow-hidden bg-hero-gradient"
     >
       {/* Background Elements */}
       <div className="absolute inset-0 bg-black/20"></div>
-      <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-r from-purple-400/20 to-pink-400/20 rounded-full blur-3xl animate-pulse"></div>
-      <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-r from-blue-400/15 to-cyan-400/15 rounded-full blur-3xl animate-pulse"></div>
+      <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-r from-purple-400/20 to-pink-400/20 rounded-full blur-3xl animate-pulse-slow"></div>
+      <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-r from-blue-400/15 to-cyan-400/15 rounded-full blur-3xl animate-pulse-slow"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
