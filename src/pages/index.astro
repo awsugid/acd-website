@@ -1,19 +1,21 @@
 ---
 // Layout Imports
-import MainLayout from '../layouts/MainLayout.astro';
+import MainLayout from "../layouts/MainLayout.astro";
 // Component Imports
-import About from '../components/About';
-import Cfp from '../components/Cfp';
-import Sponsor from '../components/Sponsor';
-import PreviousCommunityDay from '../components/PreviousCommunityDay';
-import Faq from '../components/Faq';
+import About from "../components/About";
+import Cfp from "../components/Cfp";
+import Sponsor from "../components/Sponsor";
+import PreviousCommunityDay from "../components/PreviousCommunityDay";
+import Faq from "../components/Faq";
 
 // astro imports
-import { Image } from 'astro:assets';
+import { Image } from "astro:assets";
+import { getImage } from "astro:assets";
 
 // images
-import Acd from '../images/acd.png';
-import HeroBackground from '../images/hero-bg.jpg';
+import Acd from "../images/acd.png";
+// For remote images
+import type { ImageMetadata } from "astro";
 
 // const
 const isOpenCfp = true;
@@ -22,60 +24,306 @@ const currentYear = 2025;
 const questions = [
     {
         question: "What is AWS Community Day?",
-        answer: "AWS Community Day is a community-driven event, organized by the AWS community for the community. It's an opportunity for AWS users to come together, share knowledge, learn from each other, exchange best practices, and hear from industry experts through insightful presentations."
+        answer: "AWS Community Day is a community-driven event, organized by the AWS community for the community. It's an opportunity for AWS users to come together, share knowledge, learn from each other, exchange best practices, and hear from industry experts through insightful presentations.",
     },
     {
         question: "Who can participate in this event?",
-        answer: "AWS Community Day is open to all AWS users, regardless of skill level, who are interested in learning and engaging with the community."
+        answer: "AWS Community Day is open to all AWS users, regardless of skill level, who are interested in learning and engaging with the community.",
     },
     {
         question: "Is registration required to participate in this event?",
-        answer: "Yes, registration is required to participate. Please register through the event website."
+        answer: "Yes, registration is required to participate. Please register through the event website.",
     },
     {
         question: "Is there a fee for participating in this event?",
-        answer: "Yes, there is a registration fee to participate in this event."
+        answer: "Yes, there is a registration fee to participate in this event.",
     },
     {
         question: "How to become a sponsor?",
-        answer: "Send an email directly to <a href=\"mailto: awsugid@gmail.com\">awsugid@gmail.com</a>. We will provide you with our sponsorship package, which includes detailed information on sponsorship levels and benefits."
-    }
+        answer: 'Send an email directly to <a href="mailto: awsugid@gmail.com">awsugid@gmail.com</a>. We will provide you with our sponsorship package, which includes detailed information on sponsorship levels and benefits.',
+    },
 ];
-// Full Astro Component Syntax:
-// https://docs.astro.build/basics/astro-components/
 ---
 
 <MainLayout isOpenCfp={isOpenCfp}>
-	<main class="main">
-    <!-- Hero Section -->
-    <section id="hero" class="hero section dark-background">
-      <div class="hero-background">
-          <div class="overlay"></div>
-      </div>
-      <div class="hero-content">
-          <Image src={Acd} class="img-fluid" alt="AWS Community Day Indonesia" />
-          <h4>Join the largest AWS community gathering in the region. Learn, network, and grow with fellow cloud enthusiasts.</h4>
-          <div class="event-details">
-          <p><strong>📅 October 19, 2025</strong> &nbsp; | &nbsp; <strong>📍 Thamrin Nine, Jl. M.H. Thamrin, Jakarta Pusat, Indonesia</strong></p>
-    </div>
-    </div>
-    </section>
+    <main class="min-h-screen bg-hero-gradient relative overflow-hidden">
+        <!-- Hero Section -->
+        <section
+            id="hero"
+            class="min-h-screen flex items-center justify-center relative px-4 sm:px-6 lg:px-8 py-8 md:py-12"
+        >
+            <!-- Background Elements -->
+            <div class="absolute inset-0 bg-black/20"></div>
+            <div
+                class="absolute top-20 left-10 w-72 h-72 bg-gradient-to-r from-purple-400/20 to-pink-400/20 rounded-full blur-3xl animate-pulse-slow"
+            >
+            </div>
+            <div
+                class="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-r from-blue-400/15 to-cyan-400/15 rounded-full blur-3xl animate-pulse-slow"
+            >
+            </div>
+
+            <!-- Main Content Container -->
+            <div
+                class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center relative z-10 justify-center"
+            >
+                <!-- Left Column: Content -->
+                <div
+                    class="text-center space-y-6 sm:mt-16 flex flex-col items-center"
+                >
+                    <!-- Logo -->
+                    <div class="flex justify-center">
+                        <img
+                            src="https://gudang.awscommunity.id/acd.png"
+                            class="h-20 sm:h-24 lg:h-32 w-auto object-contain drop-shadow-2xl"
+                            alt="AWS Community Day Indonesia"
+                        />
+                    </div>
+
+                    <!-- Main Heading -->
+                    <div class="space-y-6">
+                        <h1
+                            class="text-xl sm:text-2xl lg:text-3xl font-bold leading-tight text-white"
+                        >
+                            Join the <span
+                                class="text-transparent bg-clip-text bg-gradient-to-r from-[#F5C063] to-[#FF9C5F]"
+                                >Largest</span
+                            > AWS Community Gathering in the Region!
+                        </h1>
+                        <p
+                            class="text-base sm:text-lg lg:text-xl text-gray-200 leading-relaxed font-light"
+                        >
+                            Learn, network, and grow with fellow <span
+                                class="text-orange-300 font-semibold"
+                                >cloud enthusiasts</span
+                            > in the region
+                        </p>
+                    </div>
+
+                    <!-- Event Details -->
+                    <div>
+                        <div class="space-y-5">
+                            <div
+                                class="flex items-center space-x-3 text-base sm:text-lg"
+                            >
+                                <span
+                                    class="text-xl bg-white/10 p-1.5 rounded-full"
+                                    >📅</span
+                                >
+                                <span
+                                    class="text-white font-semibold tracking-wide"
+                                    >October 19, 2025</span
+                                >
+                            </div>
+                            <div
+                                class="flex items-center space-x-3 text-base sm:text-lg"
+                            >
+                                <span
+                                    class="text-xl bg-white/10 p-1.5 rounded-full"
+                                    >📍</span
+                                >
+                                <span class="text-gray-200 font-bold"
+                                    >Thamrin Nine, Jakarta Pusat, Indonesia</span
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Countdown -->
+                <div class="flex justify-center lg:justify-end">
+                    <div class="text-center">
+                        <!-- Countdown Grid -->
+                        <h1
+                            class="text-xl sm:text-2xl lg:text-3xl font-bold leading-tight text-white mb-4"
+                        >
+                            Event starts in:
+                        </h1>
+
+                        <div class="grid grid-cols-4 gap-2 sm:gap-3 md:gap-4">
+                            <!-- Days -->
+                            <div
+                                class="bg-black/40 backdrop-blur-lg border border-white/20 rounded-xl p-3 sm:p-4 md:p-5 hover:bg-black/50 transition-all duration-300 shadow-xl flex flex-col items-center"
+                            >
+                                <div
+                                    class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white"
+                                    id="days"
+                                >
+                                    --
+                                </div>
+                                <div
+                                    class="text-xs sm:text-sm text-gray-300 font-medium mt-2"
+                                >
+                                    Days
+                                </div>
+                            </div>
+
+                            <!-- Hours -->
+                            <div
+                                class="bg-black/40 backdrop-blur-lg border border-white/20 rounded-xl p-3 sm:p-4 md:p-5 hover:bg-black/50 transition-all duration-300 shadow-xl flex flex-col items-center"
+                            >
+                                <div
+                                    class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white"
+                                    id="hours"
+                                >
+                                    --
+                                </div>
+                                <div
+                                    class="text-xs sm:text-sm text-gray-300 font-medium mt-2"
+                                >
+                                    Hrs
+                                </div>
+                            </div>
+
+                            <!-- Minutes -->
+                            <div
+                                class="bg-black/40 backdrop-blur-lg border border-white/20 rounded-xl p-3 sm:p-4 md:p-5 hover:bg-black/50 transition-all duration-300 shadow-xl flex flex-col items-center"
+                            >
+                                <div
+                                    class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white"
+                                    id="minutes"
+                                >
+                                    --
+                                </div>
+                                <div
+                                    class="text-xs sm:text-sm text-gray-300 font-medium mt-2"
+                                >
+                                    Min
+                                </div>
+                            </div>
+
+                            <!-- Seconds -->
+                            <div
+                                class="bg-black/40 backdrop-blur-lg border border-white/20 rounded-xl p-3 sm:p-4 md:p-5 hover:bg-black/50 transition-all duration-300 shadow-xl flex flex-col items-center"
+                            >
+                                <div
+                                    class="text-4xl sm:text-5xl lg:text-6xl font-bold text-orange-400 animate-pulse"
+                                    id="seconds"
+                                >
+                                    --
+                                </div>
+                                <div
+                                    class="text-xs sm:text-sm text-gray-300 font-medium mt-2"
+                                >
+                                    Sec
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <script>
+            // Enhanced countdown timer with smooth animations
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const eventTime = new Date(
+                    "2025-10-19T09:00:00+07:00",
+                ).getTime(); // Jakarta time
+                const timeLeft = eventTime - now;
+
+                const daysEl = document.getElementById("days");
+                const hoursEl = document.getElementById("hours");
+                const minutesEl = document.getElementById("minutes");
+                const secondsEl = document.getElementById("seconds");
+
+                if (timeLeft <= 0) {
+                    daysEl.textContent = "0";
+                    hoursEl.textContent = "0";
+                    minutesEl.textContent = "0";
+                    secondsEl.textContent = "0";
+                    return;
+                }
+
+                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                const hours = Math.floor(
+                    (timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
+                );
+                const minutes = Math.floor(
+                    (timeLeft % (1000 * 60 * 60)) / (1000 * 60),
+                );
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                // Animate number changes
+                animateValue(daysEl, parseInt(daysEl.textContent) || 0, days);
+                animateValue(
+                    hoursEl,
+                    parseInt(hoursEl.textContent) || 0,
+                    hours,
+                );
+                animateValue(
+                    minutesEl,
+                    parseInt(minutesEl.textContent) || 0,
+                    minutes,
+                );
+                animateValue(
+                    secondsEl,
+                    parseInt(secondsEl.textContent) || 0,
+                    seconds,
+                );
+            }
+
+            function animateValue(element, start, end) {
+                if (start === end || !element) return;
+                if (isNaN(start)) start = 0;
+                if (isNaN(end)) end = 0;
+
+                element.style.transform = "scale(1.1)";
+                element.style.transition = "transform 0.25s ease-in-out";
+                setTimeout(() => {
+                    element.textContent = end.toString().padStart(2, "0");
+                    element.style.transform = "scale(1)";
+                }, 200);
+            }
+
+            // Update countdown every second
+            setInterval(updateCountdown, 1000);
+
+            // Initial call
+            document.addEventListener("DOMContentLoaded", () => {
+                updateCountdown();
+
+                // Add entrance animations
+                setTimeout(() => {
+                    document
+                        .querySelectorAll("#hero > div > div > div")
+                        .forEach((el, i) => {
+                            el.style.opacity = "0";
+                            el.style.transform = "translateY(30px)";
+                            el.style.transition =
+                                "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)";
+
+                            setTimeout(() => {
+                                el.style.opacity = "1";
+                                el.style.transform = "translateY(0)";
+                            }, i * 200);
+                        });
+                }, 100);
+            });
+        </script>
+    </main>
+
     <!-- About -->
     <About />
     <Cfp currentYear={currentYear} isOpen={isOpenCfp} />
     <!-- TODO: Update sponsor link -->
-    <Sponsor currentYear={currentYear} sponsorProposal="https://docs.google.com/presentation/d/1OJfKbSufY74B0P2hEVBS8t6bTAA9sqgKvbNl0tsYKbk/edit?usp=sharing" />
-    <Faq questionList={questions} />
+    <Sponsor
+        currentYear={currentYear}
+        sponsorProposal="https://docs.google.com/presentation/d/1OJfKbSufY74B0P2hEVBS8t6bTAA9sqgKvbNl0tsYKbk/edit?usp=sharing"
+    />
+    <Faq client:load questionList={questions} />
     <!-- Previous Community Day -->
-    <PreviousCommunityDay albums={[
-      {
-        link: 'https://photos.app.goo.gl/ohFB4F8EXHGYZ8Rq9',
-        title: 'AWS Community Day 2024'
-      },
-      {
-        link: 'https://drive.google.com/drive/folders/1X4V5RV25xvGHiSADFU_UvLasCN2T_ru_?usp=sharing',
-        title: 'AWS Community Day 2023'
-      },
-    ]} />
-  </main>
+    <PreviousCommunityDay
+        albums={[
+            {
+                link: "https://photos.app.goo.gl/ohFB4F8EXHGYZ8Rq9",
+                title: "AWS Community Day 2024",
+            },
+            {
+                link: "https://drive.google.com/drive/folders/1X4V5RV25xvGHiSADFU_UvLasCN2T_ru_?usp=sharing",
+                title: "AWS Community Day 2023",
+            },
+        ]}
+    />
 </MainLayout>
