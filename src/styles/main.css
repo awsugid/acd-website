@@ -6,25 +6,25 @@ body {
 }
 
 a {
-  color: #ff9900;
+    color: #ff9900;
 }
 
 a:hover {
-  color: #e68a00;
+    color: #e68a00;
 }
 
 /* === Theme Colors === */
 :root {
-  --bs-primary: #ff9900; /* AWS orange */
-  --bs-secondary: #232f3e; /* AWS dark blue */
-  --bs-body-bg: #ffffff;
-  --bs-body-color: #111111;
+    --bs-primary: #ff9900; /* AWS orange */
+    --bs-secondary: #232f3e; /* AWS dark blue */
+    --bs-body-bg: #ffffff;
+    --bs-body-color: #111111;
 
-  --bs-link-color: var(--bs-primary);
-  --bs-link-hover-color: #cc7a00;
+    --bs-link-color: var(--bs-primary);
+    --bs-link-hover-color: #cc7a00;
 
-  --bs-border-radius: 0.5rem;
-  --bs-font-sans-serif: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --bs-border-radius: 0.5rem;
+    --bs-font-sans-serif: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 /* === Hero Section === */
@@ -36,15 +36,15 @@ a:hover {
 }
 
 .hero h1 {
-  font-size: 3rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
 }
 
 .hero p {
-  font-size: 1.25rem;
-  font-weight: 300;
-  margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 300;
+    margin-bottom: 0.5rem;
 }
 
 .hero .event-details {
@@ -66,77 +66,77 @@ a:hover {
 
 /* Navbar background */
 .navbar {
-  background-color: var(--bs-secondary);
+    background-color: var(--bs-secondary);
 }
 
 /* Navbar brand and links */
 .navbar-brand,
 .navbar-nav .nav-link {
-  color: #fff;
+    color: #fff;
 }
 
 .navbar-nav .nav-link:hover {
-  color: var(--bs-primary);
+    color: var(--bs-primary);
 }
 
 /* Collapsed navbar menu background (mobile) */
 .navbar-collapse {
-  background-color: var(--bs-secondary);
-  padding: 1rem; /* optional: padding for better spacing */
+    background-color: var(--bs-secondary);
+    padding: 1rem; /* optional: padding for better spacing */
 }
 
 /* Make sure links inside collapse also use correct color */
 .navbar-collapse .nav-link {
-  color: #fff;
+    color: #fff;
 }
 
 .navbar-collapse .nav-link:hover {
-  color: var(--bs-primary);
+    color: var(--bs-primary);
 }
 
 /* Change the background color of the navbar-toggler button */
 .navbar-toggler {
-  background-color: var(--bs-primary); /* Light orange on hover */
-  border: none; /* Remove default border */
+    background-color: var(--bs-primary); /* Light orange on hover */
+    border: none; /* Remove default border */
 }
 
 /* Optional: Change color when the button is hovered */
 .navbar-toggler:hover {
-  background-color: var(--bs-primary); /* Light orange on hover */
-  border: none; /* Remove default border */
+    background-color: var(--bs-primary); /* Light orange on hover */
+    border: none; /* Remove default border */
 }
 
 /* === Cards (e.g. for speakers or sessions) === */
 .card {
-  border-radius: 0.5rem;
-  border: none;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    border-radius: 0.5rem;
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .card-title {
-  color: var(--bs-secondary);
-  font-weight: 600;
+    color: var(--bs-secondary);
+    font-weight: 600;
 }
 
 /* === Footer === */
 .footer {
-  background-color: #1e293b;
-  color: #f8fafc;
-  text-align: center;
-  padding: 2rem 1rem;
-  margin-top: 4rem;
+    background-color: #1e293b;
+    color: #f8fafc;
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-top: 4rem;
 }
 
 .footer a {
-  color: #ff9900;
-  text-decoration: none;
-  margin: 0 0.75rem;
-  transition: color 0.2s ease-in-out;
+    color: #ff9900;
+    text-decoration: none;
+    margin: 0 0.75rem;
+    transition: color 0.2s ease-in-out;
 }
 
 .footer a:hover {
-  color: #e68a00;
-  text-decoration: underline;
+    color: #e68a00;
+    text-decoration: underline;
 }
 
 /* === Section Padding === */
