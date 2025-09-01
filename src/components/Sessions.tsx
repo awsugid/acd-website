@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { speakersStore } from '../stores/speakersStore';
 
 interface Session {
   id: string;
@@ -36,8 +37,11 @@ export default function Sessions() {
   const [selectedSession, setSelectedSession] = useState<Session | null>(null);
 
   useEffect(() => {
-    fetch('https://sessionize.com/api/v2/5vdlrudo/view/Sessions')
-      .then(response => response.json())
+    Promise.all([
+      fetch('https://sessionize.com/api/v2/5vdlrudo/view/Sessions'),
+      speakersStore.getSpeakers()
+    ])
+      .then(([sessionsResponse]) => sessionsResponse.json())
       .then(data => {
         setSessionGroups(data);
 
@@ -70,6 +74,10 @@ export default function Sessions() {
         setLoading(false);
       });
   }, []);
+
+  const getSpeakerPhoto = (speakerId: string) => {
+    return speakersStore.getSpeakerPhoto(speakerId);
+  };
 
   const filteredSessions = sessionGroups.flatMap(group =>
     group.sessions.filter(session => {
@@ -168,11 +176,30 @@ export default function Sessions() {
               </p>
 
               {session.speakers.length > 0 && (
-                <div className="flex items-center text-orange-400 text-sm">
-                  <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                  </svg>
-                  {session.speakers.map(speaker => speaker.name).join(', ')}
+                <div className="flex items-center gap-3">
+                  <div className="flex -space-x-2">
+                    {session.speakers.slice(0, 3).map((speaker) => {
+                      const photoUrl = getSpeakerPhoto(speaker.id);
+                      return photoUrl ? (
+                        <img
+                          key={speaker.id}
+                          src={photoUrl}
+                          alt={speaker.name}
+                          className="w-8 h-8 rounded-full border-2 border-slate-700 object-cover"
+                        />
+                      ) : (
+                        <div
+                          key={speaker.id}
+                          className="w-8 h-8 rounded-full border-2 border-slate-700 bg-orange-500 flex items-center justify-center text-white text-xs font-semibold"
+                        >
+                          {speaker.name.charAt(0)}
+                        </div>
+                      );
+                    })}
+                  </div>
+                  <span className="text-orange-400 text-sm">
+                    {session.speakers.map(speaker => speaker.name).join(', ')}
+                  </span>
                 </div>
               )}
             </div>
@@ -205,12 +232,27 @@ export default function Sessions() {
               
               {selectedSession.speakers.length > 0 && (
                 <div className="mb-4">
-                  <h3 className="text-lg font-semibold text-white mb-2">Speakers</h3>
-                  <div className="flex items-center text-orange-400">
-                    <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                    </svg>
-                    {selectedSession.speakers.map(speaker => speaker.name).join(', ')}
+                  <h3 className="text-lg font-semibold text-white mb-3">Speakers</h3>
+                  <div className="flex flex-wrap gap-3">
+                    {selectedSession.speakers.map((speaker) => {
+                      const photoUrl = getSpeakerPhoto(speaker.id);
+                      return (
+                        <div key={speaker.id} className="flex items-center gap-3">
+                          {photoUrl ? (
+                            <img
+                              src={photoUrl}
+                              alt={speaker.name}
+                              className="w-16 h-16 rounded-full object-cover"
+                            />
+                          ) : (
+                            <div className="w-16 h-16 rounded-full bg-orange-500 flex items-center justify-center text-white text-lg font-semibold">
+                              {speaker.name.charAt(0)}
+                            </div>
+                          )}
+                          <span className="text-orange-400">{speaker.name}</span>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               )}

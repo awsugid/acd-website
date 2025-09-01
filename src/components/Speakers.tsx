@@ -1,29 +1,12 @@
 import { useState, useEffect } from 'react';
-
-interface Speaker {
-  id: string;
-  fullName: string;
-  bio: string;
-  tagLine: string;
-  profilePicture: string;
-  sessions: Array<{
-    id: number;
-    name: string;
-  }>;
-  links: Array<{
-    title: string;
-    url: string;
-    linkType: string;
-  }>;
-}
+import { speakersStore } from '../stores/speakersStore';
 
 export default function Speakers() {
-  const [speakers, setSpeakers] = useState<Speaker[]>([]);
+  const [speakers, setSpeakers] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('https://sessionize.com/api/v2/5vdlrudo/view/Speakers')
-      .then(response => response.json())
+    speakersStore.getSpeakers()
       .then(data => {
         setSpeakers(data);
         setLoading(false);
