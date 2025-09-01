@@ -36,7 +36,7 @@ export default function Speakers() {
 
   if (loading) {
     return (
-      <section id="speaker" className="py-20 bg-slate-800/50">
+      <section id="speakers" className="py-20 bg-slate-800/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="section-title">Our Speakers</h2>
           <div className="flex justify-center">
@@ -48,7 +48,7 @@ export default function Speakers() {
   }
 
   return (
-    <section id="speaker" className="py-20 bg-slate-800/50">
+    <section id="speakers" className="py-20 bg-slate-800/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
@@ -68,13 +68,6 @@ export default function Speakers() {
                 <h3 className="text-xl font-semibold text-white mb-2">{speaker.fullName}</h3>
                 <p className="text-orange-400 text-sm font-medium mb-3">{speaker.tagLine}</p>
                 <p className="text-slate-300 text-sm mb-4 overflow-hidden text-ellipsis" style={{display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical'}}>{speaker.bio}</p>
-
-                {speaker.sessions.length > 0 && (
-                  <div className="mb-4">
-                    <h4 className="text-sm font-medium text-slate-200 mb-2">Session:</h4>
-                    <p className="text-sm text-slate-300 italic">{speaker.sessions[0].name}</p>
-                  </div>
-                )}
 
                 <div className="flex space-x-3">
                   {speaker.links.slice(0, 3).map((link, index) => (
