@@ -5,7 +5,7 @@ interface CountdownTimerProps {
 }
 
 function CountdownTimer({
-  targetDate = "2025-09-06T23:59:00+07:00",
+  targetDate = "2025-09-13T23:59:00+07:00",
 }: CountdownTimerProps) {
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
