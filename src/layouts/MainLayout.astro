@@ -35,30 +35,50 @@ const { isOpenCfp = false } = Astro.props;
             href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
             rel="stylesheet"
         />
-        <SEO
-        title="AWS Community Day Indonesia 2025"
-        description="Join the largest AWS community gathering in Indonesia. Learn, network, and grow with fellow cloud enthusiasts."
-        openGraph={{
-          basic: {
-            title: "AWS Community Day Indonesia 2025",
-            type: "Join the largest AWS community gathering in Indonesia. Learn, network, and grow with fellow cloud enthusiasts.",
-            image: "https://gudang.awscommunity.id/og.png",
-          }
-        }}
-        extend={{
-          // extending the default link tags
-          link: [{ rel: "icon", href: faviconIco.src }],
-          // extending the default meta tags
-          meta: [
-            {
-              name: "twitter:image",
-              content: "https://gudang.awscommunity.id/og.png",
-            },
-            { name: "twitter:title", content: "AWS Community Day Indonesia 2025" },
-            { name: "twitter:description", content: "Join the largest AWS community gathering in Indonesia. Learn, network, and grow with fellow cloud enthusiasts." },
-          ],
-        }}
 
+        <!-- Pretix Widget Resources -->
+        <!-- Note: Replace 'your-pretix-domain.com/organizer/event' with your actual Pretix event URL -->
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="https://join.awscommunity.id/AWSUserGroupIndonesia/communityday2025/widget/v2.css"
+            crossorigin
+        />
+        <script
+            type="text/javascript"
+            src="https://join.awscommunity.id/widget/v2.en.js"
+            async
+            crossorigin></script>
+        <SEO
+            title="AWS Community Day Indonesia 2025"
+            description="Join the largest AWS community gathering in Indonesia. Learn, network, and grow with fellow cloud enthusiasts."
+            openGraph={{
+                basic: {
+                    title: "AWS Community Day Indonesia 2025",
+                    type: "Join the largest AWS community gathering in Indonesia. Learn, network, and grow with fellow cloud enthusiasts.",
+                    image: "https://gudang.awscommunity.id/og.png",
+                },
+            }}
+            extend={{
+                // extending the default link tags
+                link: [{ rel: "icon", href: faviconIco.src }],
+                // extending the default meta tags
+                meta: [
+                    {
+                        name: "twitter:image",
+                        content: "https://gudang.awscommunity.id/og.png",
+                    },
+                    {
+                        name: "twitter:title",
+                        content: "AWS Community Day Indonesia 2025",
+                    },
+                    {
+                        name: "twitter:description",
+                        content:
+                            "Join the largest AWS community gathering in Indonesia. Learn, network, and grow with fellow cloud enthusiasts.",
+                    },
+                ],
+            }}
         />
     </head>
     <body
