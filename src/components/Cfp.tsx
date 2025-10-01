@@ -5,7 +5,7 @@ interface CountdownTimerProps {
 }
 
 function CountdownTimer({
-  targetDate = "2025-09-06T23:59:00+07:00",
+  targetDate = "2025-09-13T23:59:00+07:00",
 }: CountdownTimerProps) {
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
@@ -88,6 +88,21 @@ function CountdownTimer({
 }
 
 function OpenCfp({ currentYear }: { currentYear: number }) {
+  const [isExpired, setIsExpired] = useState(false);
+
+  useEffect(() => {
+    const checkExpiration = () => {
+      const now = new Date().getTime();
+      const deadline = new Date("2025-09-13T23:59:00+07:00").getTime();
+      const difference = deadline - now;
+      setIsExpired(difference <= 0);
+    };
+
+    checkExpiration();
+    const interval = setInterval(checkExpiration, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
   const topics = [
     "Introduction to AWS Cloud Services",
     "Building Scalable Applications on AWS",
@@ -120,10 +135,42 @@ function OpenCfp({ currentYear }: { currentYear: number }) {
           </p>
           <div className="flex justify-center">
             <div className="text-center">
-              <h1 className="text-lg sm:text-xl lg:text-2xl font-bold leading-tight text-white mb-4">
-                Submissions deadline
-              </h1>
-              <CountdownTimer />
+              {!isExpired ? (
+                <>
+                  <h1 className="text-lg sm:text-xl lg:text-2xl font-bold leading-tight text-white mb-4">
+                    Submissions deadline
+                  </h1>
+                  <CountdownTimer />
+                </>
+              ) : (
+                <div className="bg-gradient-to-r from-green-500/20 to-teal-600/20 backdrop-blur-xl border border-green-400/20 rounded-2xl p-6">
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-r from-green-500 to-teal-500 p-3 mx-auto mb-4 flex items-center justify-center">
+                    <svg
+                      className="w-8 h-8 text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      strokeWidth="2"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                  </div>
+                  <h1 className="text-lg sm:text-xl lg:text-2xl font-bold leading-tight text-white mb-3">
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-teal-500">
+                      Thank you for your interest!
+                    </span>
+                  </h1>
+                  <p className="text-sm sm:text-base text-gray-200 leading-relaxed max-w-2xl mx-auto">
+                    The submission deadline has passed. We are still reviewing
+                    all submissions and will announce the selected speakers
+                    soon. Stay tuned for updates!
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -298,39 +345,97 @@ function OpenCfp({ currentYear }: { currentYear: number }) {
       </div>
 
       {/* CTA Section */}
-      <div className="text-center">
-        <div className="bg-gradient-to-r from-orange-500 to-pink-600 rounded-3xl p-8 sm:p-12">
-          <h4 className="text-xl sm:text-2xl font-bold text-white mb-4">
-            Ready to Share Your Expertise?
-          </h4>
-          <p className="text-base text-orange-100 mb-8 max-w-2xl mx-auto">
-            Don't miss out on this opportunity to connect with the AWS community
-            and inspire fellow cloud enthusiasts!
-          </p>
-          <a
-            href={`https://sessionize.com/aws-community-day-indonesia-${currentYear}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center space-x-3 bg-white text-orange-600 hover:text-orange-700 font-bold py-4 px-8 rounded-full transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              width="24"
-              height="24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+      {!isExpired ? (
+        <div className="text-center">
+          <div className="bg-gradient-to-r from-orange-500 to-pink-600 rounded-3xl p-8 sm:p-12">
+            <h4 className="text-xl sm:text-2xl font-bold text-white mb-4">
+              Ready to Share Your Expertise?
+            </h4>
+            <p className="text-base text-orange-100 mb-8 max-w-2xl mx-auto">
+              Don't miss out on this opportunity to connect with the AWS
+              community and inspire fellow cloud enthusiasts!
+            </p>
+            <a
+              href={`https://sessionize.com/aws-community-day-indonesia-${currentYear}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center space-x-3 bg-white text-orange-600 hover:text-orange-700 font-bold py-4 px-8 rounded-full transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
             >
-              <path d="M3.714 3.048a.498.498 0 0 0-.683.627l2.843 7.627a2 2 0 0 1 0 1.396l-2.842 7.627a.498.498 0 0 0 .682.627l18-8.5a.5.5 0 0 0 0-.904z" />
-              <path d="M6 12h16" />
-            </svg>
-            <span>Submit Your Proposal</span>
-          </a>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M3.714 3.048a.498.498 0 0 0-.683.627l2.843 7.627a2 2 0 0 1 0 1.396l-2.842 7.627a.498.498 0 0 0 .682.627l18-8.5a.5.5 0 0 0 0-.904z" />
+                <path d="M6 12h16" />
+              </svg>
+              <span>Submit Your Proposal</span>
+            </a>
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="text-center">
+          <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 max-w-2xl mx-auto">
+            <div className="flex items-center justify-center space-x-3 mb-6">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 p-3 flex items-center justify-center">
+                <svg
+                  className="w-6 h-6 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  strokeWidth="2"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                  />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="m22 6l-10 7L2 6"
+                  />
+                </svg>
+              </div>
+              <h4 className="text-xl font-bold text-white">Have Questions?</h4>
+            </div>
+            <p className="text-sm sm:text-base text-gray-300 leading-relaxed mb-6">
+              For any questions about your submission or the review process,
+              feel free to reach out to us.
+            </p>
+            <a
+              href="mailto:awsugid@gmail.com"
+              className="inline-flex items-center space-x-3 text-orange-400 hover:text-orange-300 font-semibold transition-colors duration-200"
+            >
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                strokeWidth="2"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="m22 6l-10 7L2 6"
+                />
+              </svg>
+              <span>Contact Us</span>
+            </a>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

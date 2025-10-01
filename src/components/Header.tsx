@@ -31,6 +31,7 @@ export default function Header({ isOpenCfp }: { isOpenCfp: boolean }) {
   const navItems = [
     { href: "#hero", label: "Home" },
     { href: "#about", label: "About" },
+    { href: "#tickets", label: "Tickets" },
     ...(isOpenCfp ? [{ href: "#cfp", label: "CFP" }] : []),
     ...(!isOpenCfp
       ? [

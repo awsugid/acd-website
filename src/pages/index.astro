@@ -114,7 +114,7 @@ const questions = [
                                 >
                                 <span
                                     class="text-white font-semibold tracking-wide"
-                                    >October 19, 2025</span
+                                    >October 25, 2025</span
                                 >
                             </div>
                             <div
@@ -125,7 +125,7 @@ const questions = [
                                     >📍</span
                                 >
                                 <span class="text-gray-200 font-bold"
-                                    >Thamrin Nine, Jakarta Pusat, Indonesia</span
+                                    >Auditorium Binus @Alam Sutera, Tangerang, Indonesia</span
                                 >
                             </div>
                         </div>
@@ -221,7 +221,7 @@ const questions = [
             function updateCountdown() {
                 const now = new Date().getTime();
                 const eventTime = new Date(
-                    "2025-10-19T09:00:00+07:00",
+                    "2025-10-25T09:00:00+07:00",
                 ).getTime(); // Jakarta time
                 const timeLeft = eventTime - now;
 
@@ -305,6 +305,240 @@ const questions = [
             });
         </script>
     </main>
+
+    <!-- Tickets Section -->
+    <section
+        id="tickets"
+        class="py-20 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900"
+    >
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
+                    Get Your <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-[#F5C063] to-[#FF9C5F]"
+                        >Tickets</span
+                    >
+                </h2>
+                <p
+                    class="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed"
+                >
+                    Secure your spot at Indonesia's largest AWS community
+                    gathering. Limited seats available!
+                </p>
+            </div>
+
+            <!-- Pretix Widget Container -->
+            <div class="max-w-6xl mx-auto">
+                <div
+                    class="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-2xl"
+                >
+                    <!-- Pretix Widget - Configured for iframe embedding -->
+                    <pretix-widget
+                        event="https://join.awscommunity.id/AWSUserGroupIndonesia/communityday2025/"
+                        skip-ssl-check
+                    ></pretix-widget>
+
+                    <!-- Fallback for browsers with JavaScript disabled -->
+                    <noscript>
+                        <div class="pretix-widget">
+                            <div
+                                class="pretix-widget-info-message text-center p-8"
+                            >
+                                <p class="text-gray-300 mb-4">
+                                    JavaScript is disabled in your browser.
+                                </p>
+                                <a
+                                    target="_blank"
+                                    href="https://join.awscommunity.id/AWSUserGroupIndonesia/communityday2025/"
+                                    class="inline-block bg-gradient-to-r from-orange-500 to-pink-600 hover:from-orange-600 hover:to-pink-700 text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg"
+                                >
+                                    Purchase Tickets Here
+                                </a>
+                            </div>
+                        </div>
+                    </noscript>
+                </div>
+
+                <!-- Additional Info -->
+                <div class="mt-8 text-center">
+                    <p class="text-gray-400 text-sm">
+                        🔒 Secure payment processing
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Custom CSS for Pretix Widget iframe embedding -->
+        <style>
+            /* Ensure widget container has proper sizing */
+            pretix-widget {
+                display: block;
+                width: 100%;
+            }
+
+            /* Style for embedded iframes */
+            pretix-widget iframe {
+                width: 100% !important;
+                border: none !important;
+                border-radius: 12px !important;
+                background: white;
+            }
+
+            /* Loading state styling */
+            pretix-widget:empty {
+                background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+                background-size: 200% 100%;
+                animation: loading 1.5s infinite;
+                border-radius: 12px;
+                min-height: 200px;
+            }
+
+            @keyframes loading {
+                0% { background-position: 200% 0; }
+                100% { background-position: -200% 0; }
+            }
+
+            /* Hide Pretix widget footer/branding - targeting specific elements from DOM inspection */
+            article[data-event-url] a[href="https://awscommunity.id"],
+            article[data-event-url] a[href="https://pretix.eu"],
+            article[data-event-url] a[href*="agpl_source"] {
+                display: none !important;
+                visibility: hidden !important;
+            }
+
+            /* Hide the parentheses and text around source code link */
+            article[data-event-url] a[href*="agpl_source"]::before,
+            article[data-event-url] a[href*="agpl_source"]::after {
+                display: none !important;
+            }
+
+            /* Alternative approach - hide all links after the last button in the widget */
+            pretix-widget article button:last-of-type ~ a {
+                display: none !important;
+            }
+
+            /* Hide text nodes containing parentheses after buttons */
+            pretix-widget article button:last-of-type ~ * {
+                font-size: 0 !important;
+                line-height: 0 !important;
+                opacity: 0 !important;
+            }
+
+            /* Keep only the ticket content visible */
+            pretix-widget article > *:not(h3):not(.row):not(button):not(.pretix-widget-item):not([class*="product"]) {
+                display: none !important;
+            }
+        </style>
+
+        <!-- JavaScript to remove Pretix footer after widget loads -->
+        <script>
+            // Function to remove Pretix footer elements
+            function removePretixFooter() {
+                // Wait for widget to load
+                const observer = new MutationObserver((mutations) => {
+                    mutations.forEach((mutation) => {
+                        mutation.addedNodes.forEach((node) => {
+                            if (node.nodeType === 1) { // Element node
+                                // Find and remove footer links
+                                const footerLinks = node.querySelectorAll('a[href="https://awscommunity.id"], a[href="https://pretix.eu"], a[href*="agpl_source"]');
+                                footerLinks.forEach(link => {
+                                    // Remove the link and surrounding text
+                                    const parent = link.parentNode;
+                                    const nextSibling = link.nextSibling;
+                                    const prevSibling = link.previousSibling;
+
+                                    // Remove parentheses and text around links
+                                    if (nextSibling && nextSibling.nodeType === 3 && nextSibling.textContent.trim() === ')') {
+                                        nextSibling.remove();
+                                    }
+                                    if (prevSibling && prevSibling.nodeType === 3 && prevSibling.textContent.trim() === '(') {
+                                        prevSibling.remove();
+                                    }
+
+                                    link.remove();
+                                });
+
+                                // Also check the widget article for footer elements
+                                const articles = node.querySelectorAll('article');
+                                articles.forEach(article => {
+                                    const footerLinksInArticle = article.querySelectorAll('a[href="https://awscommunity.id"], a[href="https://pretix.eu"], a[href*="agpl_source"]');
+                                    footerLinksInArticle.forEach(link => {
+                                        const parent = link.parentNode;
+                                        const nextSibling = link.nextSibling;
+                                        const prevSibling = link.previousSibling;
+
+                                        if (nextSibling && nextSibling.nodeType === 3 && nextSibling.textContent.trim() === ')') {
+                                            nextSibling.remove();
+                                        }
+                                        if (prevSibling && prevSibling.nodeType === 3 && prevSibling.textContent.trim() === '(') {
+                                            prevSibling.remove();
+                                        }
+
+                                        link.remove();
+                                    });
+                                });
+                            }
+                        });
+                    });
+                });
+
+                // Start observing the tickets section
+                const ticketsSection = document.querySelector('#tickets');
+                if (ticketsSection) {
+                    observer.observe(ticketsSection, {
+                        childList: true,
+                        subtree: true
+                    });
+                }
+
+                // Also try to remove footer elements that might already be present
+                setTimeout(() => {
+                    const existingFooterLinks = document.querySelectorAll('#tickets a[href="https://awscommunity.id"], #tickets a[href="https://pretix.eu"], #tickets a[href*="agpl_source"]');
+                    existingFooterLinks.forEach(link => {
+                        const nextSibling = link.nextSibling;
+                        const prevSibling = link.previousSibling;
+
+                        if (nextSibling && nextSibling.nodeType === 3 && nextSibling.textContent.trim() === ')') {
+                            nextSibling.remove();
+                        }
+                        if (prevSibling && prevSibling.nodeType === 3 && prevSibling.textContent.trim() === '(') {
+                            prevSibling.remove();
+                        }
+
+                        link.remove();
+                    });
+                }, 1000);
+
+                // Retry every 2 seconds for the first 10 seconds
+                for (let i = 1; i <= 5; i++) {
+                    setTimeout(() => {
+                        const footerLinks = document.querySelectorAll('#tickets a[href="https://awscommunity.id"], #tickets a[href="https://pretix.eu"], #tickets a[href*="agpl_source"]');
+                        footerLinks.forEach(link => {
+                            const nextSibling = link.nextSibling;
+                            const prevSibling = link.previousSibling;
+
+                            if (nextSibling && nextSibling.nodeType === 3 && nextSibling.textContent.trim() === ')') {
+                                nextSibling.remove();
+                            }
+                            if (prevSibling && prevSibling.nodeType === 3 && prevSibling.textContent.trim() === '(') {
+                                prevSibling.remove();
+                            }
+
+                            link.remove();
+                        });
+                    }, i * 2000);
+                }
+            }
+
+            // Initialize when DOM is ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', removePretixFooter);
+            } else {
+                removePretixFooter();
+            }
+        </script>
+    </section>
 
     <!-- About -->
     <About />
