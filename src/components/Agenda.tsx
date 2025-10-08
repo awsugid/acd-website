@@ -28,7 +28,7 @@ export default function Agenda() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('https://sessionize.com/api/v2/jl4ktls0/view/GridSmart')
+    fetch('https://sessionize.com/api/v2/5vdlrudo/view/GridSmart')
       .then(response => response.json())
       .then(data => {
         setGridData(data);
