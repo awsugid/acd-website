@@ -7,7 +7,7 @@ import Cfp from "../components/Cfp";
 import Agenda from "../components/Agenda";
 import Sessions from "../components/Sessions";
 import Speakers from "../components/Speakers";
-import Sponsor from "../components/Sponsor";
+import CallForSponsor from "../components/CallForSponsor";
 import PreviousCommunityDay from "../components/PreviousCommunityDay";
 import Faq from "../components/Faq";
 
@@ -19,6 +19,7 @@ import { getImage } from "astro:assets";
 import Acd from "../images/acd.png";
 // For remote images
 import type { ImageMetadata } from "astro";
+import Sponsors from "../components/Sponsors";
 
 // const
 const isOpenCfp = false;
@@ -549,7 +550,8 @@ const questions = [
     </div>
 
     <Cfp client:load currentYear={currentYear} isOpen={isOpenCfp} />
-    <Sponsor
+    <Sponsors />
+    <CallForSponsor
         currentYear={currentYear}
         sponsorProposal="https://docs.google.com/presentation/d/1OJfKbSufY74B0P2hEVBS8t6bTAA9sqgKvbNl0tsYKbk/edit?usp=sharing"
     />
