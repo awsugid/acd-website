@@ -122,8 +122,12 @@ export default function Agenda() {
                                 )}
                               </td>
                               <td key={`speaker-${sessionIndex}`} className="px-6 py-4 text-slate-300">
-                                {session && session.speakers.length > 0 
-                                  ? session.speakers.map(s => s.name).join(', ')
+                                {session 
+                                  ? session.isServiceSession 
+                                    ? session.description || '-'
+                                    : session.speakers.length > 0 
+                                      ? session.speakers.map(s => s.name).join(', ')
+                                      : '-'
                                   : '-'
                                 }
                               </td>
