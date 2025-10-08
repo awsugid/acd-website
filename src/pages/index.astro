@@ -117,7 +117,7 @@ const questions = [
                                 >
                                 <span
                                     class="text-white font-semibold tracking-wide"
-                                    >October 25, 2025</span
+                                    >October 25, 2025, 08:30 - 17:00 WIB</span
                                 >
                             </div>
                             <div
@@ -127,8 +127,12 @@ const questions = [
                                     class="text-xl bg-white/10 p-1.5 rounded-full"
                                     >📍</span
                                 >
-                                <span class="text-gray-200 font-bold"
-                                    >Auditorium Binus @Alam Sutera, Tangerang, Indonesia</span
+                                <a
+                                    href="https://maps.app.goo.gl/B5sKfT9QCf4Bdzsx9"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="text-gray-200 font-bold hover:text-white transition-colors duration-200 underline decoration-gray-400 hover:decoration-white"
+                                    >Auditorium Binus @Alam Sutera, Tangerang, Indonesia</a
                                 >
                             </div>
                         </div>
@@ -223,7 +227,9 @@ const questions = [
             let countdownInterval;
             function updateCountdown() {
                 const now = new Date().getTime();
-                const eventTime = new Date("2025-10-25T09:00:00+07:00").getTime();
+                const eventTime = new Date(
+                    "2025-10-25T08:30:00+07:00",
+                ).getTime(); // Jakarta time
                 const timeLeft = eventTime - now;
 
                 const daysEl = document.getElementById("days");
