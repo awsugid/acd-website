@@ -64,7 +64,7 @@ export default function Agenda() {
         </div>
 
         <div className="bg-slate-800/50 rounded-lg overflow-hidden">
-          <div className="overflow-x-auto">
+          <div>
             <table className="w-full">
               {(() => {
                 // Get unique rooms
@@ -95,9 +95,9 @@ export default function Agenda() {
                   <>
                     <thead className="bg-slate-700/70">
                       <tr>
-                        <th className="px-6 py-4 text-left text-sm font-semibold text-white">Time</th>
+                        <th className="px-2 sm:px-6 py-4 text-left text-xs sm:text-sm font-semibold text-white">Time</th>
                         {allRooms.map(room => (
-                          <th key={room.id} className="px-6 py-4 text-left text-sm font-semibold text-white">{room.name}</th>
+                          <th key={room.id} className="px-2 sm:px-6 py-4 text-left text-xs sm:text-sm font-semibold text-white">{room.name}</th>
                         ))}
                       </tr>
                     </thead>
@@ -106,27 +106,29 @@ export default function Agenda() {
                         const firstSession = Object.values(roomSessions)[0];
                         const timeDisplay = `${new Date(firstSession.startsAt).toLocaleTimeString('en-US', { 
                           hour: '2-digit', 
-                          minute: '2-digit' 
+                          minute: '2-digit',
+                          hour12: false 
                         })} - ${new Date(firstSession.endsAt).toLocaleTimeString('en-US', { 
                           hour: '2-digit', 
-                          minute: '2-digit' 
+                          minute: '2-digit',
+                          hour12: false 
                         })}`;
                         
                         return (
                           <tr key={index} className="hover:bg-slate-700/30 transition-colors">
-                            <td className="px-6 py-4 text-orange-400 font-medium whitespace-nowrap">
+                            <td className="px-2 sm:px-6 py-4 text-orange-400 font-medium text-xs sm:text-sm">
                               {timeDisplay}
                             </td>
                             {allRooms.map(room => {
                               const session = roomSessions[room.name];
                               return (
-                                <td key={room.id} className="px-6 py-4">
+                                <td key={room.id} className="px-2 sm:px-6 py-4">
                                   {session ? (
                                     <div>
-                                      <div className={`font-semibold mb-1 ${session.isServiceSession ? 'text-slate-400' : 'text-white'}`}>
+                                      <div className={`font-semibold mb-1 text-xs sm:text-sm ${session.isServiceSession ? 'text-slate-400' : 'text-white'}`}>
                                         {session.title}
                                       </div>
-                                      <div className="text-sm text-slate-300">
+                                      <div className="text-xs sm:text-sm text-slate-300">
                                         {session.isServiceSession 
                                           ? session.description || '-'
                                           : session.speakers.length > 0 

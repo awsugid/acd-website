@@ -173,24 +173,24 @@ export default function Sessions() {
               className="bg-slate-700/50 rounded-xl p-6 hover:bg-slate-700/70 transition-colors cursor-pointer"
               onClick={() => setSelectedSession(session)}
             >
-              <div className="flex justify-between items-start mb-3">
-                <h3 className="text-xl font-semibold text-white">{session.title}</h3>
-                <div className="text-right ml-4">
-                  {session.startsAt && session.endsAt && (
-                    <div className="text-orange-400 text-sm font-medium">
-                      {new Date(session.startsAt).toLocaleTimeString('en-US', { 
-                        hour: '2-digit', 
-                        minute: '2-digit' 
-                      })} - {new Date(session.endsAt).toLocaleTimeString('en-US', { 
-                        hour: '2-digit', 
-                        minute: '2-digit' 
-                      })}
-                    </div>
-                  )}
-                  {session.room && (
-                    <div className="text-slate-400 text-xs mt-1">{session.room}</div>
-                  )}
-                </div>
+              <h3 className="text-xl font-semibold text-white mb-2">{session.title}</h3>
+              <div className="flex gap-4 mb-3 text-sm">
+                {session.startsAt && session.endsAt && (
+                  <div className="text-orange-400 font-medium">
+                    {new Date(session.startsAt).toLocaleTimeString('en-US', { 
+                      hour: '2-digit', 
+                      minute: '2-digit',
+                      hour12: false 
+                    })} - {new Date(session.endsAt).toLocaleTimeString('en-US', { 
+                      hour: '2-digit', 
+                      minute: '2-digit',
+                      hour12: false 
+                    })}
+                  </div>
+                )}
+                {session.room && (
+                  <div className="text-slate-400">📍 {session.room}</div>
+                )}
               </div>
               <p className="text-slate-300 text-sm mb-4 overflow-hidden text-ellipsis" style={{display: '-webkit-box', WebkitLineClamp: 4, WebkitBoxOrient: 'vertical'}}>
                 {session.description}
@@ -238,7 +238,27 @@ export default function Sessions() {
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50" onClick={() => setSelectedSession(null)}>
             <div className="bg-slate-800 rounded-xl p-6 max-w-2xl w-full max-h-[80vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
               <div className="flex justify-between items-start mb-4">
-                <h2 className="text-2xl font-bold text-white pr-4">{selectedSession.title}</h2>
+                <div className="pr-4">
+                  <h2 className="text-2xl font-bold text-white mb-2">{selectedSession.title}</h2>
+                  <div className="flex gap-4 text-sm">
+                    {selectedSession.startsAt && selectedSession.endsAt && (
+                      <div className="text-orange-400 font-medium">
+                        {new Date(selectedSession.startsAt).toLocaleTimeString('en-US', { 
+                          hour: '2-digit', 
+                          minute: '2-digit',
+                          hour12: false 
+                        })} - {new Date(selectedSession.endsAt).toLocaleTimeString('en-US', { 
+                          hour: '2-digit', 
+                          minute: '2-digit',
+                          hour12: false 
+                        })}
+                      </div>
+                    )}
+                    {selectedSession.room && (
+                      <div className="text-slate-400">📍 {selectedSession.room}</div>
+                    )}
+                  </div>
+                </div>
                 <button 
                   onClick={() => setSelectedSession(null)}
                   className="text-slate-400 hover:text-white"
