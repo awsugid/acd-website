@@ -5,6 +5,9 @@ interface Session {
   id: string;
   title: string;
   description: string;
+  startsAt?: string;
+  endsAt?: string;
+  room?: string;
   speakers: Array<{
     id: string;
     name: string;
@@ -42,15 +45,15 @@ export default function Sessions() {
       speakersStore.getSpeakers()
     ])
       .then(([sessionsResponse]) => sessionsResponse.json())
-      .then(data => {
-        setSessionGroups(data);
+      .then(sessionsData => {
+        setSessionGroups(sessionsData);
 
         // Extract unique categories, levels, and languages
         const allCategories = new Set<string>(['All']);
         const allLevels = new Set<string>(['All']);
         const allLanguages = new Set<string>(['All']);
 
-        data.forEach((group: SessionGroup) => {
+        sessionsData.forEach((group: SessionGroup) => {
           group.sessions.forEach(session => {
             session.categories.forEach(category => {
               if (category.name === 'Category') {
@@ -96,7 +99,7 @@ export default function Sessions() {
 
   if (loading) {
     return (
-      <section id="sessions" className="py-20 bg-slate-900/50">
+      <section id="sessions" className="py-20 bg-slate-900/60">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="section-title">Sessions</h2>
           <div className="flex justify-center">
@@ -108,7 +111,7 @@ export default function Sessions() {
   }
 
   return (
-    <section id="sessions" className="py-20 bg-slate-900/50">
+    <section id="sessions" className="py-20 bg-slate-900/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
@@ -170,7 +173,25 @@ export default function Sessions() {
               className="bg-slate-700/50 rounded-xl p-6 hover:bg-slate-700/70 transition-colors cursor-pointer"
               onClick={() => setSelectedSession(session)}
             >
-              <h3 className="text-xl font-semibold text-white mb-3">{session.title}</h3>
+              <div className="flex justify-between items-start mb-3">
+                <h3 className="text-xl font-semibold text-white">{session.title}</h3>
+                <div className="text-right ml-4">
+                  {session.startsAt && session.endsAt && (
+                    <div className="text-orange-400 text-sm font-medium">
+                      {new Date(session.startsAt).toLocaleTimeString('en-US', { 
+                        hour: '2-digit', 
+                        minute: '2-digit' 
+                      })} - {new Date(session.endsAt).toLocaleTimeString('en-US', { 
+                        hour: '2-digit', 
+                        minute: '2-digit' 
+                      })}
+                    </div>
+                  )}
+                  {session.room && (
+                    <div className="text-slate-400 text-xs mt-1">{session.room}</div>
+                  )}
+                </div>
+              </div>
               <p className="text-slate-300 text-sm mb-4 overflow-hidden text-ellipsis" style={{display: '-webkit-box', WebkitLineClamp: 4, WebkitBoxOrient: 'vertical'}}>
                 {session.description}
               </p>

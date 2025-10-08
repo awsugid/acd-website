@@ -35,9 +35,9 @@ export default function Header({ isOpenCfp }: { isOpenCfp: boolean }) {
     ...(isOpenCfp ? [{ href: "#cfp", label: "CFP" }] : []),
     ...(!isOpenCfp
       ? [
+          { href: "#agenda", label: "Agenda" },
           { href: "#sessions", label: "Sessions" },
           { href: "#speakers", label: "Speakers" },
-          { href: "#agenda", label: "Agenda" },
         ]
       : []),
     { href: "#sponsor", label: "Sponsors" },

@@ -4,6 +4,7 @@ import MainLayout from "../layouts/MainLayout.astro";
 // Component Imports
 import About from "../components/About";
 import Cfp from "../components/Cfp";
+import Agenda from "../components/Agenda";
 import Sessions from "../components/Sessions";
 import Speakers from "../components/Speakers";
 import Sponsor from "../components/Sponsor";
@@ -533,6 +534,7 @@ const questions = [
 
     <!-- Sessions & Speakers Group -->
     <div id="sessions-speakers-group">
+        { !isOpenCfp ? <Agenda client:load data-section="agenda" /> : null }
         { !isOpenCfp ? <Sessions client:load data-section="sessions" /> : null }
         { !isOpenCfp ? <Speakers client:load data-section="speakers" /> : null }
     </div>
