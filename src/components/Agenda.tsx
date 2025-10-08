@@ -63,50 +63,83 @@ export default function Agenda() {
           <div className="w-24 h-1 bg-gradient-to-r from-orange-400 to-pink-500 mx-auto rounded-full mb-8"></div>
         </div>
 
-        <div className="overflow-x-auto">
-          <table className="w-full bg-slate-800/50 rounded-lg overflow-hidden">
-            <thead className="bg-slate-700/70">
-              <tr>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-white">Time</th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-white">Session</th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-white">Speaker(s)</th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-white">Room</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-600/50">
-              {gridData.map((timeSlot, index) => 
-                timeSlot.rooms.map(room => 
-                  room.sessions.map((session, sessionIndex) => (
-                    <tr key={session.id} className="hover:bg-slate-700/30 transition-colors">
-                      <td className="px-6 py-4 text-orange-400 font-medium whitespace-nowrap">
-                        {new Date(session.startsAt).toLocaleTimeString('en-US', { 
-                          hour: '2-digit', 
-                          minute: '2-digit' 
-                        })} - {new Date(session.endsAt).toLocaleTimeString('en-US', { 
-                          hour: '2-digit', 
-                          minute: '2-digit' 
+        <div className="bg-slate-800/50 rounded-lg overflow-hidden">
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead className="bg-slate-700/70">
+                <tr>
+                  <th className="px-6 py-4 text-left text-sm font-semibold text-white">Time</th>
+                  <th className="px-6 py-4 text-left text-sm font-semibold text-white">Session 1</th>
+                  <th className="px-6 py-4 text-left text-sm font-semibold text-white">Speaker 1</th>
+                  <th className="px-6 py-4 text-left text-sm font-semibold text-white">Room 1</th>
+                  <th className="px-6 py-4 text-left text-sm font-semibold text-white">Session 2</th>
+                  <th className="px-6 py-4 text-left text-sm font-semibold text-white">Speaker 2</th>
+                  <th className="px-6 py-4 text-left text-sm font-semibold text-white">Room 2</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-600/50">
+                {(() => {
+                  const allSessions = gridData.flatMap(timeSlot => 
+                    timeSlot.rooms.flatMap(room => 
+                      room.sessions.map(session => ({ ...session, roomName: room.name }))
+                    )
+                  );
+                  
+                  const sessionsByTime = {};
+                  allSessions.forEach(session => {
+                    const timeKey = `${session.startsAt}-${session.endsAt}`;
+                    if (!sessionsByTime[timeKey]) {
+                      sessionsByTime[timeKey] = [];
+                    }
+                    sessionsByTime[timeKey].push(session);
+                  });
+                  
+                  return Object.entries(sessionsByTime).map(([timeKey, sessions], index) => {
+                    const timeDisplay = `${new Date(sessions[0].startsAt).toLocaleTimeString('en-US', { 
+                      hour: '2-digit', 
+                      minute: '2-digit' 
+                    })} - ${new Date(sessions[0].endsAt).toLocaleTimeString('en-US', { 
+                      hour: '2-digit', 
+                      minute: '2-digit' 
+                    })}`;
+                    
+                    return (
+                      <tr key={index} className="hover:bg-slate-700/30 transition-colors">
+                        <td className="px-6 py-4 text-orange-400 font-medium whitespace-nowrap">
+                          {timeDisplay}
+                        </td>
+                        {[0, 1].map(sessionIndex => {
+                          const session = sessions[sessionIndex];
+                          return (
+                            <>
+                              <td key={`session-${sessionIndex}`} className="px-6 py-4">
+                                {session ? (
+                                  <div className={`font-semibold ${session.isServiceSession ? 'text-slate-400' : 'text-white'}`}>
+                                    {session.title}
+                                  </div>
+                                ) : (
+                                  <div className="text-slate-500">-</div>
+                                )}
+                              </td>
+                              <td key={`speaker-${sessionIndex}`} className="px-6 py-4 text-slate-300">
+                                {session && session.speakers.length > 0 
+                                  ? session.speakers.map(s => s.name).join(', ')
+                                  : '-'
+                                }
+                              </td>
+                              <td key={`room-${sessionIndex}`} className="px-6 py-4 text-slate-400 text-sm">
+                                {session ? session.roomName : '-'}
+                              </td>
+                            </>
+                          );
                         })}
-                      </td>
-                      <td className="px-6 py-4">
-                        <div className={`font-semibold ${session.isServiceSession ? 'text-slate-400' : 'text-white'}`}>
-                          {session.title}
-                        </div>
-                      </td>
-                      <td className="px-6 py-4 text-slate-300">
-                        {session.speakers.length > 0 
-                          ? session.speakers.map(s => s.name).join(', ')
-                          : '-'
-                        }
-                      </td>
-                      <td className="px-6 py-4 text-slate-400 text-sm">
-                        {room.name}
-                      </td>
-                    </tr>
-                  ))
-                )
-              )}
-            </tbody>
-          </table>
+                      </tr>
+                    );
+                  });
+                })()}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
       
