@@ -108,7 +108,7 @@ export default function Agenda() {
                           hour: '2-digit', 
                           minute: '2-digit',
                           hour12: false 
-                        })} - ${new Date(firstSession.endsAt).toLocaleTimeString('en-US', { 
+                        })} <br> to <br> ${new Date(firstSession.endsAt).toLocaleTimeString('en-US', { 
                           hour: '2-digit', 
                           minute: '2-digit',
                           hour12: false 
@@ -117,7 +117,7 @@ export default function Agenda() {
                         return (
                           <tr key={index} className="hover:bg-slate-700/30 transition-colors">
                             <td className="px-2 sm:px-6 py-4 text-orange-400 font-medium text-xs sm:text-sm">
-                              {timeDisplay}
+                              <div dangerouslySetInnerHTML={{__html: timeDisplay}}></div>
                             </td>
                             {allRooms.map(room => {
                               const session = roomSessions[room.name];
