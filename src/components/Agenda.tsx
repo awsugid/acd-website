@@ -126,7 +126,13 @@ export default function Agenda() {
                                   {session ? (
                                     <div>
                                       <div className={`font-semibold mb-1 text-xs sm:text-sm ${session.isServiceSession ? 'text-slate-400' : 'text-white'}`}>
-                                        {session.title}
+                                        {session.isServiceSession ? (
+                                          session.title
+                                        ) : (
+                                          <a href={`#session-${session.id}`} className="hover:text-orange-400 transition-colors">
+                                            {session.title}
+                                          </a>
+                                        )}
                                       </div>
                                       <div className="text-xs sm:text-sm text-slate-300">
                                         {session.isServiceSession 

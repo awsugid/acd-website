@@ -169,8 +169,9 @@ export default function Sessions() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {filteredSessions.map((session) => (
             <div 
-              key={session.id} 
-              className="bg-slate-700/50 rounded-xl p-6 hover:bg-slate-700/70 transition-colors cursor-pointer"
+              key={session.id}
+              id={`session-${session.id}`}
+              className="bg-slate-700/50 rounded-xl p-6 hover:bg-slate-700/70 transition-colors cursor-pointer scroll-mt-20"
               onClick={() => setSelectedSession(session)}
             >
               <h3 className="text-xl font-semibold text-white mb-2">{session.title}</h3>
