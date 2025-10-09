@@ -19,7 +19,7 @@ const TIER_IMAGE_HEIGHT: Record<Tier, number> = {
     Silver: 80,
     Bronze: 60,
     Community: 50,
-    Other: 40,
+    Other: 60,
 };
 
 const TIER_LABEL: Record<Tier, string> = {
@@ -40,7 +40,13 @@ const sponsors: SponsorsByTier = {
         logoUrl: "https://gudang.awscommunity.id/sponsors/jetbrains-mono-white.png",
         name: "JetBrains",
         website: "https://www.jetbrains.com/",
-    }],
+    },
+    {
+        logoUrl: "https://gudang.awscommunity.id/sponsors/binus-uni.png",
+        name: "BINUS University",
+        website: "https://binus.ac.id/",
+    }
+],
 };
 
 const Sponsors: React.FC = () => (
