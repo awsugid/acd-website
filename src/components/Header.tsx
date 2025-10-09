@@ -40,7 +40,7 @@ export default function Header({ isOpenCfp }: { isOpenCfp: boolean }) {
           { href: "#speakers", label: "Speakers" },
         ]
       : []),
-    { href: "#sponsor", label: "Sponsors" },
+    { href: "#sponsors", label: "Sponsors" },
     { href: "#faq", label: "FAQ" },
   ];
 

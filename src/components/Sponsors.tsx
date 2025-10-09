@@ -44,7 +44,7 @@ const sponsors: SponsorsByTier = {
 };
 
 const Sponsors: React.FC = () => (
-    <section className="py-20 bg-slate-800/5">
+    <section id="sponsors" className="py-20 bg-slate-800/5">
         <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
                 Our Sponsors
