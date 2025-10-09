@@ -52,44 +52,34 @@ const Sponsors: React.FC = () => (
             <div className="w-24 h-1 bg-gradient-to-r from-orange-400 to-pink-500 mx-auto rounded-full mb-8"></div>
         </div>
         <div className="flex flex-col gap-10 items-center w-full">
-            {TIER_ORDER.map((tier) => (
-                <div
-                    key={tier}
-                    className="w-full max-w-4xl p-0"
-                >
-                    <h2 className="text-center text-xl font-semibold mb-6 text-white">
-                        {TIER_LABEL[tier]}
-                    </h2>
-                    <div className="flex flex-wrap gap-8 justify-center items-center min-h-[60px]">
-                        {sponsors[tier].length === 0 ? (
-                            <div className="italic text-white text-lg w-full text-center">Slots available</div>
-                        ) : (
-                            sponsors[tier].map((sponsor) => (
-                                <a
-                                    key={sponsor.name}
-                                    href={sponsor.website || "#"}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex items-center justify-center p-0 min-w-[120px] min-h-[48px] transition"
-                                    title={sponsor.name}
-                                >
-                                    <img
-                                        src={sponsor.logoUrl}
-                                        alt={sponsor.name}
-                                        style={{
-                                            height: TIER_IMAGE_HEIGHT[tier],
-                                            maxWidth: 180,
-                                            objectFit: "contain",
-                                        }}
-                                        className="block"
-                                    />
-                                </a>
-                            ))
-                        )}
+            <div className="flex flex-wrap gap-8 justify-center items-center min-h-[60px]">
+                {sponsors["Other"].length === 0 ? (
+                                <div className="italic text-white text-lg w-full text-center">Slots available</div>
+                ) : (sponsors["Other"].map((sponsor) => (
+                                    <a
+                                        key={sponsor.name}
+                                        href={sponsor.website || "#"}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex items-center justify-center p-0 min-w-[120px] min-h-[48px] transition"
+                                        title={sponsor.name}
+                                    >
+                                        <img
+                                            src={sponsor.logoUrl}
+                                            alt={sponsor.name}
+                                            style={{
+                                                height: TIER_IMAGE_HEIGHT["Other"],
+                                                maxWidth: 180,
+                                                objectFit: "contain",
+                                            }}
+                                            className="block"
+                                        />
+                                    </a>
+                                ))
+                            )}
+                        </div>
                     </div>
-                </div>
-            ))}
-        </div>
+                )
     </section>
 );
 
