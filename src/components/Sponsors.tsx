@@ -4,6 +4,7 @@ type Sponsor = {
     name: string;
     logoUrl: string;
     website?: string;
+    isNeedBackground: boolean;
 };
 
 type Tier = "Gold" | "Silver" | "Bronze" | "Community" | "Other";
@@ -36,16 +37,19 @@ const sponsors: SponsorsByTier = {
     Silver: [],
     Bronze: [],
     Community: [],
-    Other: [{
-        logoUrl: "https://gudang.awscommunity.id/sponsors/jetbrains-mono-white.png",
-        name: "JetBrains",
-        website: "https://www.jetbrains.com/",
-    },
+    Other: [
     {
         logoUrl: "https://gudang.awscommunity.id/sponsors/binus-uni.png",
         name: "BINUS University",
         website: "https://binus.ac.id/",
-    }
+        isNeedBackground: true,
+    },
+    {
+        logoUrl: "https://gudang.awscommunity.id/sponsors/jetbrains-mono-white.png",
+        name: "JetBrains",
+        website: "https://www.jetbrains.com/",
+        isNeedBackground: false,
+    },
 ],
 };
 
@@ -77,6 +81,7 @@ const Sponsors: React.FC = () => (
                                                 height: TIER_IMAGE_HEIGHT["Other"],
                                                 maxWidth: 180,
                                                 objectFit: "contain",
+                                                backgroundColor: sponsor.isNeedBackground ? "white" : undefined,
                                             }}
                                             className="block"
                                         />
