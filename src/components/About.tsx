@@ -82,7 +82,7 @@ export default function About() {
                 </div>
                 <div className="text-center">
                   <div className="text-2xl font-bold text-pink-400 mb-1">
-                    5+
+                    10+
                   </div>
                   <div className="text-sm text-gray-400">Speakers</div>
                 </div>

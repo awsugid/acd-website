@@ -16,11 +16,11 @@ type SponsorsByTier = {
 const TIER_ORDER: Tier[] = ["Gold", "Silver", "Bronze", "Community", "Other"];
 
 const TIER_IMAGE_HEIGHT: Record<Tier, number> = {
-    Gold: 100,
-    Silver: 80,
-    Bronze: 60,
-    Community: 50,
-    Other: 60,
+    Gold: 160,
+    Silver: 150,
+    Bronze: 140,
+    Community: 130,
+    Other: 120,
 };
 
 const TIER_LABEL: Record<Tier, string> = {
@@ -79,7 +79,8 @@ const Sponsors: React.FC = () => (
                                             alt={sponsor.name}
                                             style={{
                                                 height: TIER_IMAGE_HEIGHT["Other"],
-                                                maxWidth: 180,
+                                                maxWidth: 200,
+                                                padding: 5,
                                                 objectFit: "contain",
                                                 backgroundColor: sponsor.isNeedBackground ? "white" : undefined,
                                             }}
