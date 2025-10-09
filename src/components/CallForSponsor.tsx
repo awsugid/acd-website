@@ -1,6 +1,6 @@
 import HeroBackground from "../images/acd23.jpg?url";
 
-export default function Sponsor({
+export default function CallForSponsor({
   currentYear,
   sponsorProposal,
 }: {
@@ -60,8 +60,8 @@ export default function Sponsor({
       <div className="absolute inset-0 bg-black/75"></div>
       {/* Gradient overlay */}
       <div className="absolute inset-0 bg-black/40"></div>
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
