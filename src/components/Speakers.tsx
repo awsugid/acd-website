@@ -50,7 +50,7 @@ export default function Speakers() {
                 />
                 <h3 className="text-xl font-semibold text-white mb-2">{speaker.fullName}</h3>
                 <p className="text-orange-400 text-sm font-medium mb-3">{speaker.tagLine}</p>
-                <p className="text-slate-300 text-sm mb-4 overflow-hidden text-ellipsis" style={{display: '-webkit-box', WebkitLineClamp: 5, WebkitBoxOrient: 'vertical'}}>{speaker.bio}</p>
+                <p className="text-slate-300 text-sm mb-4 overflow-hidden text-ellipsis" style={{display: '-webkit-box', WebkitLineClamp: 8, WebkitBoxOrient: 'vertical'}}>{speaker.bio}</p>
 
                 <div className="flex space-x-3">
                   {speaker.links.slice(0, 3).map((link, index) => (
