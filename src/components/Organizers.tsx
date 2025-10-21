@@ -35,6 +35,12 @@ const defaultOrganizers: Person[] = [
         profileUrl: "https://id.linkedin.com/in/razanfawwaz/en"
     },
     {
+        name: "Muhammad Ananta Faturrahman",
+        photoUrl: "https://media.licdn.com/dms/image/v2/D5603AQG6w28C3O6MZg/profile-displayphoto-shrink_400_400/B56ZUe9mejGoAg-/0/1739981220292?e=1762387200&v=beta&t=sR7OihboNhULvBdb04j5m-1LZAPBO50GAcRY7cNKTec",
+        profileUrl: "https://www.linkedin.com/in/anantafatur",
+        title: "DevOps Engineer Intern at Rey.id"
+    },
+    {
         name: "Albert Suwandhi",
         photoUrl: "https://avatars.builderprofile.aws.dev/2xueFDPqeAvQ3oYB0pBnH4SLAJV.webp",
         profileUrl: "https://id.linkedin.com/in/albertsuwandhi",
@@ -51,6 +57,12 @@ const defaultOrganizers: Person[] = [
         photoUrl: "https://media.licdn.com/dms/image/v2/C5603AQFruR73ircbBQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1628700538041?e=2147483647&v=beta&t=tgPMlmRFRRc0KQg40N0ivq2uCKNAv-H67gnXFUCftS8",
         profileUrl: "https://id.linkedin.com/in/luthfi-anandra",
         title: "Site Reliability Engineer at AccelByte"
+    },
+    {
+        name: "Farhan Aulianda",
+        photoUrl: "https://media.licdn.com/dms/image/v2/D5603AQFpp4rSKz9b8Q/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1727676631368?e=2147483647&v=beta&t=N5iXHIp_K-_NhnbNfDKgMkyyf4K1MAMaLXqCVDRuJjM",
+        profileUrl: "https://www.linkedin.com/in/farhan-aulianda",
+        title: "AWS Community Builder",
     }
 ];
 
@@ -84,6 +96,16 @@ const defaultVolunteers: Person[] = [
     {
         name: "Valentina Aileen Cruz Handoko",
         profileUrl: "https://www.linkedin.com/in/valentina-aileen-cruz-handoko-494358326",
+        title: "Volunteer",
+    },
+    {
+        name: "Jecelyn Grizha",
+        photoUrl: "https://media.licdn.com/dms/image/v2/D5603AQGZa5sKmQi8ng/profile-displayphoto-shrink_200_200/B56ZbxfNprH0AY-/0/1747808214391?e=2147483647&v=beta&t=J8jjnBMmr1jijKEz3LBQ1sHcg5JwaMINh3jiKHh5fNA",
+        profileUrl: "https://id.linkedin.com/in/jecelyn-grizha",
+        title: "Volunteer",
+    },
+    {
+        name: "Felicia Faustine Hidayat",
         title: "Volunteer",
     }
 ];
