@@ -41,6 +41,7 @@ export default function Header({ isOpenCfp }: { isOpenCfp: boolean }) {
         ]
       : []),
     { href: "#sponsors", label: "Sponsors" },
+    { href: "#organizers", label: "Organizers" },
     { href: "#faq", label: "FAQ" },
   ];
 
