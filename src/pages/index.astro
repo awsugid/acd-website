@@ -68,10 +68,12 @@ const questions = [
             <!-- Main Content Container -->
             <div
                 class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center relative z-10 justify-center"
+                id="main-content-container"
             >
                 <!-- Left Column: Content -->
                 <div
                     class="text-center space-y-6 sm:mt-16 flex flex-col items-center"
+                    id="left-column"
                 >
                     <!-- Logo -->
                     <div class="flex justify-center">
@@ -133,7 +135,7 @@ const questions = [
                 </div>
 
                 <!-- Right Column: Countdown -->
-                <div class="flex justify-center lg:justify-end">
+                <div class="flex justify-center lg:justify-end" id="countdown-column">
                     <div class="text-center">
                         <!-- Countdown Grid -->
                         <h1
@@ -217,53 +219,52 @@ const questions = [
         </section>
 
         <script>
-            // Enhanced countdown timer with smooth animations
+            let countdownInterval;
             function updateCountdown() {
                 const now = new Date().getTime();
-                const eventTime = new Date(
-                    "2025-10-25T09:00:00+07:00",
-                ).getTime(); // Jakarta time
+                const eventTime = new Date("2025-10-25T09:00:00+07:00").getTime();
                 const timeLeft = eventTime - now;
 
                 const daysEl = document.getElementById("days");
                 const hoursEl = document.getElementById("hours");
                 const minutesEl = document.getElementById("minutes");
                 const secondsEl = document.getElementById("seconds");
+                const countdownColumn = document.getElementById("countdown-column");
+                const leftColumn = document.getElementById("left-column");
+                const mainContentContainer = document.getElementById("main-content-container");
 
                 if (timeLeft <= 0) {
                     daysEl.textContent = "0";
                     hoursEl.textContent = "0";
                     minutesEl.textContent = "0";
                     secondsEl.textContent = "0";
+
+                    // Hide countdown
+                    if (countdownColumn) countdownColumn.style.display = "none";
+                    if (leftColumn) leftColumn.style.width = "100%";
+                    if (mainContentContainer) mainContentContainer.style.gridTemplateColumns = "1fr";
+
+                    // Move Sessions and Speakers group above Tickets
+                    const ticketsSection = document.getElementById("tickets");
+                    const sessionsSpeakersGroup = document.getElementById("sessions-speakers-group");
+                    if (ticketsSection && sessionsSpeakersGroup) {
+                        ticketsSection.parentNode.insertBefore(sessionsSpeakersGroup, ticketsSection);
+                    }
+
+                    // Stop the interval
+                    if (countdownInterval) clearInterval(countdownInterval);
                     return;
                 }
 
                 const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-                const hours = Math.floor(
-                    (timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
-                );
-                const minutes = Math.floor(
-                    (timeLeft % (1000 * 60 * 60)) / (1000 * 60),
-                );
+                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
-                // Animate number changes
                 animateValue(daysEl, parseInt(daysEl.textContent) || 0, days);
-                animateValue(
-                    hoursEl,
-                    parseInt(hoursEl.textContent) || 0,
-                    hours,
-                );
-                animateValue(
-                    minutesEl,
-                    parseInt(minutesEl.textContent) || 0,
-                    minutes,
-                );
-                animateValue(
-                    secondsEl,
-                    parseInt(secondsEl.textContent) || 0,
-                    seconds,
-                );
+                animateValue(hoursEl, parseInt(hoursEl.textContent) || 0, hours);
+                animateValue(minutesEl, parseInt(minutesEl.textContent) || 0, minutes);
+                animateValue(secondsEl, parseInt(secondsEl.textContent) || 0, seconds);
             }
 
             function animateValue(element, start, end) {
@@ -279,23 +280,16 @@ const questions = [
                 }, 200);
             }
 
-            // Update countdown every second
-            setInterval(updateCountdown, 1000);
-
-            // Initial call
             document.addEventListener("DOMContentLoaded", () => {
                 updateCountdown();
-
-                // Add entrance animations
+                countdownInterval = setInterval(updateCountdown, 1000);
                 setTimeout(() => {
                     document
                         .querySelectorAll("#hero > div > div > div")
                         .forEach((el, i) => {
                             el.style.opacity = "0";
                             el.style.transform = "translateY(30px)";
-                            el.style.transition =
-                                "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)";
-
+                            el.style.transition = "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)";
                             setTimeout(() => {
                                 el.style.opacity = "1";
                                 el.style.transform = "translateY(0)";
@@ -307,10 +301,7 @@ const questions = [
     </main>
 
     <!-- Tickets Section -->
-    <section
-        id="tickets"
-        class="py-20 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900"
-    >
+    <section id="tickets" class="py-20 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Section Header -->
             <div class="text-center mb-16">
@@ -540,18 +531,20 @@ const questions = [
         </script>
     </section>
 
+    <!-- Sessions & Speakers Group -->
+    <div id="sessions-speakers-group">
+        { !isOpenCfp ? <Sessions client:load data-section="sessions" /> : null }
+        { !isOpenCfp ? <Speakers client:load data-section="speakers" /> : null }
+    </div>
+
     <!-- About -->
     <About />
     <Cfp client:load currentYear={currentYear} isOpen={isOpenCfp} />
-    { !isOpenCfp ? <Sessions client:load /> : null }
-    { !isOpenCfp ? <Speakers client:load /> : null }
-    <!-- TODO: Update sponsor link -->
     <Sponsor
         currentYear={currentYear}
         sponsorProposal="https://docs.google.com/presentation/d/1OJfKbSufY74B0P2hEVBS8t6bTAA9sqgKvbNl0tsYKbk/edit?usp=sharing"
     />
     <Faq client:load questionList={questions} />
-    <!-- Previous Community Day -->
     <PreviousCommunityDay
         albums={[
             {
