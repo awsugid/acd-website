@@ -201,7 +201,7 @@ export default function Footer() {
                   <span>Contact Us</span>
                 </h5>
                 <div className="space-y-3 text-sm">
-                  <a
+                  {/*<a
                     href="https://wa.me/+6285259044226"
                     className="flex items-center space-x-3 text-gray-300 hover:text-white transition-colors duration-20"
                   >
@@ -219,7 +219,7 @@ export default function Footer() {
                       />
                     </svg>
                     <span>+62 8525 9044 226</span>
-                  </a>
+                  </a>*/}
                   <a
                     href="mailto:awsugid@gmail.com"
                     className="flex items-center space-x-3 text-gray-300 hover:text-white transition-colors duration-20"
