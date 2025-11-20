@@ -1,0 +1,176 @@
+---
+import "../styles/main.css";
+import { SEO } from "astro-seo";
+
+import Footer from "../components/Footer.tsx";
+import favicon from "../images/favicon-32x32.png?url";
+import appleTouchIcon from "../images/apple-touch-icon.png?url";
+import faviconIco from "../images/favicon.ico?url";
+
+const { title = "AWS User Group Indonesia" } = Astro.props;
+---
+
+<html lang="en" class="scroll-smooth">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{title}</title>
+        <meta
+            name="description"
+            content="Connecting cloud enthusiasts, developers, and builders across Indonesia. Join AWS User Groups in Jakarta, Medan, Surabaya, and Bandung."
+        />
+        <meta
+            name="keywords"
+            content="AWS, Amazon Web Services, Cloud Computing, Indonesia, User Group, Community, Jakarta, Medan, Surabaya, Bandung"
+        />
+
+        <!-- Favicons -->
+        <link href={favicon} rel="icon" />
+        <link href={appleTouchIcon} rel="apple-touch-icon" />
+
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com" rel="preconnect" />
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+            rel="stylesheet"
+        />
+
+        <SEO
+            title={title}
+            description="Connecting cloud enthusiasts, developers, and builders across Indonesia. Join AWS User Groups in Jakarta, Medan, Surabaya, and Bandung."
+            openGraph={{
+                basic: {
+                    title: title,
+                    type: "website",
+                    image: "https://gudang.awscommunity.id/og.png",
+                },
+            }}
+            extend={{
+                link: [{ rel: "icon", href: faviconIco }],
+                meta: [
+                    {
+                        name: "twitter:image",
+                        content: "https://gudang.awscommunity.id/og.png",
+                    },
+                    {
+                        name: "twitter:title",
+                        content: title,
+                    },
+                    {
+                        name: "twitter:description",
+                        content:
+                            "Connecting cloud enthusiasts, developers, and builders across Indonesia.",
+                    },
+                ],
+            }}
+        />
+    </head>
+    <body
+        class="bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white antialiased"
+    >
+        <!-- Simple Portal Header -->
+        <header
+            class="fixed top-0 left-0 right-0 z-50 transition-all duration-100 bg-slate-900/30 backdrop-blur-xl border-b border-white/10 shadow-2xl"
+        >
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16 sm:h-20">
+                    <!-- Logo -->
+                    <div class="flex-shrink-0">
+                        <a href="/" class="flex items-center space-x-3 group">
+                            <div class="relative">
+                                <img
+                                    src="https://gudang.awscommunity.id/logo.png"
+                                    width={40}
+                                    height={40}
+                                    alt="AWS User Group Indonesia"
+                                    class="w-10 h-10 sm:w-12 sm:h-12 rounded-lg shadow-lg group-hover:shadow-xl transition-all duration-300"
+                                />
+                                <div
+                                    class="absolute inset-0 rounded-lg bg-gradient-to-r from-orange-400/20 to-pink-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                                >
+                                </div>
+                            </div>
+                            <div class="hidden sm:block">
+                                <div class="text-white font-semibold text-lg">
+                                    AWS User Group
+                                </div>
+                                <div
+                                    class="text-orange-300 text-sm font-medium"
+                                >
+                                    Indonesia
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Simple Navigation -->
+                    <div class="hidden md:flex items-center space-x-1">
+                        <a
+                            href="/"
+                            class="text-gray-300 hover:text-white px-4 py-2 rounded-lg font-medium transition-all duration-300 hover:bg-white/10"
+                        >
+                            Home
+                        </a>
+                        <a
+                            href="/comday-25"
+                            class="text-gray-300 hover:text-white px-4 py-2 rounded-lg font-medium transition-all duration-300 hover:bg-white/10"
+                        >
+                            Community Day 2025
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <slot />
+        <Footer />
+
+        <!-- Scroll Top Button -->
+        <button
+            id="scroll-top"
+            class="fixed bottom-8 right-8 bg-gradient-to-r from-orange-500 to-pink-600 hover:from-orange-600 hover:to-pink-700 text-white p-3 rounded-full shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-20 opacity-0 pointer-events-none z-50"
+            aria-label="Scroll to top"
+        >
+            <svg
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+            >
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M7 11l5-5m0 0l5 5m-5-5v12"></path>
+            </svg>
+        </button>
+
+        <script>
+            // Scroll to top functionality
+            const scrollTopBtn = document.getElementById("scroll-top");
+
+            if (scrollTopBtn) {
+                window.addEventListener("scroll", () => {
+                    if (window.scrollY > 300) {
+                        scrollTopBtn.classList.remove(
+                            "opacity-0",
+                            "pointer-events-none",
+                        );
+                        scrollTopBtn.classList.add("opacity-100");
+                    } else {
+                        scrollTopBtn.classList.add(
+                            "opacity-0",
+                            "pointer-events-none",
+                        );
+                        scrollTopBtn.classList.remove("opacity-100");
+                    }
+                });
+
+                scrollTopBtn.addEventListener("click", () => {
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                });
+            }
+        </script>
+    </body>
+</html>

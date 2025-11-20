@@ -7,14 +7,15 @@ import Footer from "../components/Footer.tsx";
 import favicon from "../images/favicon-32x32.png";
 import appleTouchIcon from "../images/apple-touch-icon.png";
 import faviconIco from "../images/favicon.ico";
-const { isOpenCfp = false } = Astro.props;
+const { isOpenCfp = false, title = "AWS Community Day Indonesia 2025" } =
+    Astro.props;
 ---
 
 <html lang="en" class="scroll-smooth">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>AWS Community Day Indonesia 2025</title>
+        <title>{title}</title>
         <meta
             name="description"
             content="Join the largest AWS community gathering in Indonesia. Learn, network, and grow with fellow cloud enthusiasts."

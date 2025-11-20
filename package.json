@@ -21,10 +21,12 @@
     "bootstrap-icons": "^1.13.1",
     "prettier": "^3.6.2",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-simple-maps": "^3.0.0"
   },
   "devDependencies": {
     "@astrojs/tailwind": "^5.1.5",
+    "@types/react-simple-maps": "^3.0.6",
     "tailwindcss": "^3.4.17"
   }
 }
