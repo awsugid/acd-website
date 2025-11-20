@@ -1,0 +1,84 @@
+---
+import { getCollection, render } from "astro:content";
+import PortalLayout from "../../layouts/PortalLayout.astro";
+
+export async function getStaticPaths() {
+    const posts = await getCollection("blog");
+    return posts.map((post) => ({
+        params: { slug: post.id },
+        props: { post },
+    }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<PortalLayout title={`${post.data.title} - AWS User Group Indonesia`}>
+    <main
+        class="min-h-screen bg-slate-900 relative overflow-hidden pt-24 pb-12 px-4 sm:px-6 lg:px-8"
+    >
+        <!-- Background Elements -->
+        <div class="absolute inset-0 bg-black/20"></div>
+
+        <article class="max-w-3xl mx-auto relative z-10">
+            <header class="mb-10 text-center">
+                <div
+                    class="flex items-center justify-center gap-3 text-sm text-gray-400 mb-4"
+                >
+                    <time datetime={post.data.pubDate.toISOString()}>
+                        {
+                            post.data.pubDate.toLocaleDateString("en-US", {
+                                year: "numeric",
+                                month: "long",
+                                day: "numeric",
+                            })
+                        }
+                    </time>
+                    <span>•</span>
+                    <span>{post.data.author}</span>
+                </div>
+                <h1
+                    class="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight"
+                >
+                    {post.data.title}
+                </h1>
+                <div class="flex justify-center gap-2">
+                    {
+                        post.data.tags.map((tag) => (
+                            <span class="px-3 py-1 rounded-full bg-white/5 text-xs font-medium text-gray-300 border border-white/10">
+                                #{tag}
+                            </span>
+                        ))
+                    }
+                </div>
+            </header>
+
+            <div
+                class="prose prose-invert prose-lg max-w-none prose-headings:text-white prose-a:text-orange-400 hover:prose-a:text-orange-300 prose-strong:text-white prose-code:text-pink-300"
+            >
+                <Content />
+            </div>
+
+            <div class="mt-12 pt-8 border-t border-white/10 text-center">
+                <a
+                    href="/blog"
+                    class="inline-flex items-center text-gray-400 hover:text-white transition-colors"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5 mr-2"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                    >
+                        <path
+                            fill-rule="evenodd"
+                            d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                    Back to Blog
+                </a>
+            </div>
+        </article>
+    </main>
+</PortalLayout>
