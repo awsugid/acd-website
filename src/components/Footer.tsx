@@ -31,9 +31,9 @@ export default function Footer() {
       color: "from-blue-500 to-blue-700",
     },
     {
-      href: "https://www.meetup.com/aws-ug-jakarta/",
+      href: "https://jakarta.awscommunity.id",
       icon: "meetup",
-      label: "Meetup",
+      label: "Jakarta",
       color: "from-red-500 to-red-700",
     },
   ];
