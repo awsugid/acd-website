@@ -254,17 +254,22 @@ export default function Footer() {
         <div className="border-t border-white/10 py-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-gray-400 text-center md:text-left">
-              © 2025 AWS Community Day Indonesia. Organized with ❤️ by{" "}
-              <a
-                href="https://awscommunity.id"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-orange-400 hover:text-orange-300 transition-colors duration-20"
-              >
-                AWS User Group Indonesia
-              </a>{" "}
-              🇮🇩
+              © {new Date().getFullYear()} AWS User Group Indonesia 🇮🇩
             </p>
+            <div className="flex items-center space-x-6">
+              <a
+                href="/privacy-policy"
+                className="text-gray-400 hover:text-white transition-colors duration-20"
+              >
+                Privacy Policy
+              </a>
+              <a
+                href="/terms-of-service"
+                className="text-gray-400 hover:text-white transition-colors duration-20"
+              >
+                Terms of Service
+              </a>
+            </div>
           </div>
         </div>
       </div>
