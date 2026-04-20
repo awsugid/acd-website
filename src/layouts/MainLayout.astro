@@ -7,7 +7,7 @@ import Footer from "../components/Footer.tsx";
 import favicon from "../images/favicon-32x32.png";
 import appleTouchIcon from "../images/apple-touch-icon.png";
 import faviconIco from "../images/favicon.ico";
-const { isOpenCfp = false, title = "AWS Community Day Indonesia 2025" } =
+const { isOpenCfp = false, title = "AWS User Group Indonesia - Community Day 2025" } =
     Astro.props;
 ---
 
@@ -51,11 +51,11 @@ const { isOpenCfp = false, title = "AWS Community Day Indonesia 2025" } =
             async
             crossorigin></script>
         <SEO
-            title="AWS Community Day Indonesia 2025"
+            title={title}
             description="Join the largest AWS community gathering in Indonesia. Learn, network, and grow with fellow cloud enthusiasts."
             openGraph={{
                 basic: {
-                    title: "AWS Community Day Indonesia 2025",
+                    title: title,
                     type: "Join the largest AWS community gathering in Indonesia. Learn, network, and grow with fellow cloud enthusiasts.",
                     image: "https://gudang.awscommunity.id/og.png",
                 },
@@ -71,7 +71,7 @@ const { isOpenCfp = false, title = "AWS Community Day Indonesia 2025" } =
                     },
                     {
                         name: "twitter:title",
-                        content: "AWS Community Day Indonesia 2025",
+                        content: title,
                     },
                     {
                         name: "twitter:description",
